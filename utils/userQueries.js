@@ -4,7 +4,7 @@ const queries = {
     VALUES ($1,$2,$3,$4, $5)
     `,
     // Lista de usuarios en la base de datos ("/users")
-    getAllUsers: `SELECT username, avatar ,quote
+    getAllUsers: `SELECT username, avatar, quote
     FROM users
     ORDER BY id;`,
     // Buscar el username en el token y mostrar el usuario conectado + Mostrar perfil de usuario concreto ("/users/:id")
@@ -13,7 +13,7 @@ const queries = {
     FROM users
     WHERE email=$1;`,  
     // Editar el perfil del propio usuario (no puede cambiarse el email) ("/profile/:id")
-    updateUserByUsername: `UPDATE users
+    updateUserByEmail: `UPDATE users
     SET username = $2, password = $3, avatar = $4, quote = $5
     WHERE email = $1
     `,
