@@ -10,7 +10,7 @@ const createUser = async (user) => {
     try {
         client = await pool.connect(); // Espera a abrir conexion
         const hashedPassword = password ? await bcrypt.hash(password, 10) : null; // Si hay contraseña, la hasheamos
-        const data = await client.query(queries.createUser,[username, email, hashedPassword, avatar, quote])
+        const data = await client.query(queries.createUser, [username, email, hashedPassword, avatar, quote])
         result = data.rowCount
     } catch (err) {
         console.log(err);
@@ -21,7 +21,7 @@ const createUser = async (user) => {
     return result
 }
 
-// GET ALL
+// GET ALL (READ)
 const getAllUsers = async () => {
     let client, result;
     try {
@@ -36,14 +36,15 @@ const getAllUsers = async () => {
     }
     return result
 }
-// GET BY EMAIL CONTROLLER PARAMS
-const getUsersByEmail = async (email) => {
+
+// GET BY EMAIL (CONTROLLER PARAMS)
+const getUserByEmail = async (email) => {
     let client, result;
     try {
         client = await pool.connect(); // Espera a abrir conexion
-        const data = await client.query(queries.getUsersByEmail, [email])
+        const data = await client.query(queries.getUserByEmail, [email])
         result = data.rows
-        
+
     } catch (err) {
         console.log(err);
         throw err;
@@ -53,17 +54,15 @@ const getUsersByEmail = async (email) => {
     return result
 }
 
-
-
-//UPDATE
+//UPDATE BY EMAIL
 const updateUserByEmail = async (updatedUser, currentEmail) => {
-    const { name, email, password, img } = updatedUser;
+    const { username, password, avatar, quote } = updatedUser;
     let client, result;
     try {
         client = await pool.connect();
         const hashedPassword = password ? await bcrypt.hash(password, 10) : null; // Si hay contraseña, la hasheamos
-        const data = await client.query(queries.updateUserByEmail, [name, email, hashedPassword, img, currentEmail]);
-        result = data.rows; // Devuelve la fila actualizada
+        const data = await client.query(queries.updateUserByEmail, [currentEmail, username, hashedPassword, avatar, quote]);
+        result = data.rowCount; // Devuelve el número de filas actualizadas (para definir en el controlador si el email existe o no)
     } catch (err) {
         console.log('Error updating user:', err);
         throw err;
@@ -72,6 +71,7 @@ const updateUserByEmail = async (updatedUser, currentEmail) => {
     }
     return result;
 };
+
 // DELETE
 const deleteUserByEmail = async (userToDelete) => {
     const email = userToDelete;
@@ -80,7 +80,7 @@ const deleteUserByEmail = async (userToDelete) => {
         client = await pool.connect();
         const data = await client.query(queries.deleteUserByEmail, [email]);
         result = data.rowCount
-        
+
     } catch (err) {
         console.log('Error deleting user:', err);
         throw err;
@@ -89,3 +89,13 @@ const deleteUserByEmail = async (userToDelete) => {
     }
     return result;
 };
+
+const Users = {
+    createUser,
+    getAllUsers,
+    getUserByEmail,
+    updateUserByEmail,
+    deleteUserByEmail
+}
+
+module.exports = Users;
