@@ -76,27 +76,28 @@ const updateUserByEmail = async (req, res) => {
     }
 }
 
-// const deleteUserByEmail = async (req, res) => {
-//     const { email } = req.query; // {email} le pasaremos el email por el body
-//     try {
-//         const response = await User.deleteUserByEmail(email);
-//         if (response) {
-//             res.status(200).json({
-//                 message: `User: ${email} was deleted successfully`,
-//                 data: response
-//             });
-//         } else {
-//             res.status(404).json({ error: 'User with that email was not found' });
-//         }
-//     } catch (error) {
-//         console.error('Error deleting user:', error);
-//         res.status(500).json({ error: 'Internal server error' });
-//     }
-// }
+const deleteUserByEmail = async (req, res) => {
+    const { email } = req.query; // {email} le pasaremos el email por el body
+    try {
+        const response = await UserModel.deleteUserByEmail(email);
+        if (response) {
+            res.status(200).json({
+                message: `User: ${email} was deleted successfully`,
+                data: response
+            });
+        } else {
+            res.status(404).json({ error: 'User with that email was not found' });
+        }
+    } catch (error) {
+        console.error('Error deleting user:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
 
 module.exports = {
     createUser,
     getAllUsers,
     getUserByEmail,
-    updateUserByEmail
+    updateUserByEmail,
+    deleteUserByEmail
 }

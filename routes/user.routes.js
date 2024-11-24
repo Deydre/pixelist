@@ -9,6 +9,6 @@ router.post('/', userDataValidateChainMethod, userController.createUser);
 router.get('/', userController.getAllUsers);
 router.get('/email',userController.getUserByEmail);
 router.put('/email',userController.updateUserByEmail);
-// router.delete('/email', userController.deleteUserByEmail);
+router.delete('/email', userController.deleteUserByEmail);
 
 module.exports = router;

@@ -72,29 +72,30 @@ const updateUserByEmail = async (updatedUser, currentEmail) => {
     return result;
 };
 
-// // DELETE
-// const deleteUserByEmail = async (userToDelete) => {
-//     const email = userToDelete;
-//     let client, result;
-//     try {
-//         client = await pool.connect();
-//         const data = await client.query(queries.deleteUserByEmail, [email]);
-//         result = data.rowCount
+// DELETE
+const deleteUserByEmail = async (userToDelete) => {
+    const email = userToDelete;
+    let client, result;
+    try {
+        client = await pool.connect();
+        const data = await client.query(queries.deleteUserByEmail, [email]);
+        result = data.rowCount
 
-//     } catch (err) {
-//         console.log('Error deleting user:', err);
-//         throw err;
-//     } finally {
-//         client.release();
-//     }
-//     return result;
-// };
+    } catch (err) {
+        console.log('Error deleting user:', err);
+        throw err;
+    } finally {
+        client.release();
+    }
+    return result;
+};
 
 const Users = {
     createUser,
     getAllUsers,
     getUserByEmail,
-    updateUserByEmail
+    updateUserByEmail,
+    deleteUserByEmail
 }
 
 module.exports = Users;
