@@ -34,23 +34,23 @@ const getAllUsers = async (req, res) => {
     let users;
     users = await UserModel.getAllUsers();
 
-    res.status(200).json(users); // 
+    res.status(200).json(users);
 }
 
-// const getUsersByEmail = async (req, res) => {
-//     const { email } = req.query;
-//     try {
-//         const userData = await User.getUsersByEmail(email);
-//         if (userData) {
-//             res.status(200).json(userData);
-//         } else {
-//             res.status(404).json({ error: 'User not found' });
-//         }
-//     } catch (error) {
-//         console.error('Error obtaining user by email:', error);
-//         res.status(500).json({ error: 'Internal server error' });
-//     }
-// }
+const getUserByEmail = async (req, res) => {
+    const { email } = req.query;
+    try {
+        const userData = await UserModel.getUserByEmail(email);
+        if (userData && userData.length > 0) {
+            res.status(200).json(userData);
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error obtaining user by email:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
 
 
 // const updateUserByEmail = async (req, res) => {
@@ -92,5 +92,6 @@ const getAllUsers = async (req, res) => {
 
 module.exports = {
     createUser,
-    getAllUsers
+    getAllUsers,
+    getUserByEmail
 }

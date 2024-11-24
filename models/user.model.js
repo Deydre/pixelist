@@ -36,24 +36,23 @@ const getAllUsers = async () => {
     }
     return result
 }
-// // GET BY EMAIL CONTROLLER PARAMS
-// const getUsersByEmail = async (email) => {
-//     let client, result;
-//     try {
-//         client = await pool.connect(); // Espera a abrir conexion
-//         const data = await client.query(queries.getUsersByEmail, [email])
-//         result = data.rows
+
+// GET BY EMAIL (CONTROLLER PARAMS)
+const getUserByEmail = async (email) => {
+    let client, result;
+    try {
+        client = await pool.connect(); // Espera a abrir conexion
+        const data = await client.query(queries.getUserByEmail, [email])
+        result = data.rows
         
-//     } catch (err) {
-//         console.log(err);
-//         throw err;
-//     } finally {
-//         client.release();
-//     }
-//     return result
-// }
-
-
+    } catch (err) {
+        console.log(err);
+        throw err;
+    } finally {
+        client.release();
+    }
+    return result
+}
 
 // //UPDATE
 // const updateUserByEmail = async (updatedUser, currentEmail) => {
@@ -92,7 +91,8 @@ const getAllUsers = async () => {
 
 const Users = {
     createUser,
-    getAllUsers
+    getAllUsers,
+    getUserByEmail
 }
 
 module.exports = Users;
