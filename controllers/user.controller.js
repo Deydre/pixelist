@@ -13,7 +13,7 @@ const createUser = async (req, res, next) => {
             });
         }
         const newUser = req.body; // {username, email, password, avatar, quote}
-        const response = await UserModel.createUser(newUser); 
+        const response = await UserModel.createUser(newUser);
         res.status(201).json({
             "items_created": response,
             message: `User created: ${req.body.email}`,
@@ -52,25 +52,29 @@ const getUserByEmail = async (req, res) => {
     }
 }
 
+const updateUserByEmail = async (req, res) => {
+    const { email } = req.query;
+    const updatedUserData = req.body;
+    try {
+        const response = await UserModel.updateUserByEmail(updatedUserData, email);
+        if (response === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
 
-// const updateUserByEmail = async (req, res) => {
-//     const { email } = req.query; 
-//     const updatedUserData = req.body; 
-//     try {
-//         const response = await User.updateUserByEmail(email);
-//         if (response) {
-//             res.status(200).json({
-//                 message: `User updated: ${email}`,
-//                 data: updatedUserData
-//             });
-//         } else {
-//             res.status(404).json({ error: 'User not found' });
-//         }
-//     } catch (error) {
-//         console.error('Error updating User:', error);
-//         res.status(500).json({ error: 'Internal server error' });
-//     }
-// }
+        res.status(200).json({
+            message: `User updated: ${email}`,
+            username: updatedUserData.username,
+            email: updatedUserData.email,
+            password: "***********",
+            avatar: updatedUserData.avatar,
+            quote: updatedUserData.quote
+        });
+
+    } catch (error) {
+        console.error('Error updating User:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
 
 // const deleteUserByEmail = async (req, res) => {
 //     const { email } = req.query; // {email} le pasaremos el email por el body
@@ -93,5 +97,6 @@ const getUserByEmail = async (req, res) => {
 module.exports = {
     createUser,
     getAllUsers,
-    getUserByEmail
+    getUserByEmail,
+    updateUserByEmail
 }
