@@ -12,9 +12,14 @@ app.use(express.json());
 
 // Rutas importadas
 const userRoutes = require("./routes/user.routes");
+const completedRoutes = require("./routes/completed.routes");
+const videogameRoutes = require("./routes/videogame.routes");
+
 
 // Rutas habilitadas
 app.use('/api/user', userRoutes);
+app.use('/api/completed', completedRoutes);
+app.use('/api/videogame', videogameRoutes);
 
 // Para ruta no existente
 app.use("*", (req, res) => {
