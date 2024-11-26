@@ -1,25 +1,10 @@
-const VideogameModel = require('../models/videogame.model'); // Importar el modelo de la BBDD
-
-const checkVideogameExistsById = async (req, res) => {
-    let { id } = req.params;
-    let exists;
-    exists = await VideogameModel.checkVideogameExistsById(id);
-
-    res.status(200).json(exists);
-}
+const videogameModel = require('../models/videogame.model'); // Importar el modelo de la BBDD
 
 
 const createVideogame = async (req, res, next) => {
     try {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({
-                success: false,
-                errors: errors.array(),
-            });
-        }
         const newVideogame = req.body; // {id, name, background_image}
-        const response = await UserModel.createVideogame(newVideogame);
+        const response = await videogameModel.createVideogame(newVideogame);
         res.status(201).json({
             "items_created": response,
             message: `Videogame created: ${newVideogame.name}`,
@@ -34,7 +19,16 @@ const createVideogame = async (req, res, next) => {
     }
 }
 
+const checkVideogameExistsById = async (req, res) => {
+    let { id } = req.params;
+    let exists;
+    exists = await videogameModel.checkVideogameExistsById(id);
+
+    res.status(200).json(exists);
+}
+
+
 module.exports = {
+    createVideogame,
     checkVideogameExistsById,
-    createVideogame
 }

@@ -12,14 +12,17 @@ app.use(express.json());
 
 // Rutas importadas
 const userRoutes = require("./routes/user.routes");
-const completedRoutes = require("./routes/completed.routes");
 const videogameRoutes = require("./routes/videogame.routes");
-
+const favoritedRoutes = require("./routes/favorited.routes");
+const wishlistedRoutes = require("./routes/wishlisted.routes");
+const completedRoutes = require("./routes/completed.routes");
 
 // Rutas habilitadas
 app.use('/api/user', userRoutes);
-app.use('/api/completed', completedRoutes);
 app.use('/api/videogame', videogameRoutes);
+app.use('/api/favorited', favoritedRoutes);
+app.use('/api/wishlisted', wishlistedRoutes);
+app.use('/api/completed', completedRoutes);
 
 // Para ruta no existente
 app.use("*", (req, res) => {
