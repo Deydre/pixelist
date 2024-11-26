@@ -17,12 +17,13 @@ const getAllWishlistedFromUser = async (email) => {
     }
     return result
 }
+
 const markAsWishlisted = async (Wishlisted) => {
     const { id_user, id_game, date } = Wishlisted;
     let client, result;
     try {
         client = await pool.connect(); // Espera a abrir conexion
-        const data = await client.query(queries.markAsWishlisted, [id_user, id_game, date, rating, review])
+        const data = await client.query(queries.markAsWishlisted, [id_user, id_game, date])
         result = data.rowCount
     } catch (err) {
         console.log(err);
