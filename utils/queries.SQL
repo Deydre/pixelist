@@ -1,4 +1,4 @@
--- Queries for table users
+-- QUERIES FOR TABLE USERS
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -27,7 +27,7 @@ SELECT *
 FROM users
 
 
--- Queries or table videogames
+-- QUERIES FOR TABLE VIDEOGAMES
 CREATE TABLE videogames (
     id INT UNIQUE NOT NULL,
     name VARCHAR(50) UNIQUE NOT NULL,
@@ -43,13 +43,69 @@ INSERT INTO videogames (id, name, background_image) VALUES
 SELECT * 
 FROM videogames
 
--- Queries for table completed
+-- QUERIES FOR TABLE FAVORITES
+CREATE TABLE favorites (
+    id_user INT NOT NULL,
+    id_game INT NOT NULL,
+	date DATE NOT NULL,
+    PRIMARY KEY (id_user, id_game),
+    FOREIGN KEY (id_user) REFERENCES users(id),
+    FOREIGN KEY (id_game) REFERENCES videogames(id)
+);
+
+INSERT INTO favorites (id_user, id_game, date) 
+VALUES 
+(1, 124, CURRENT_TIMESTAMP), -- user1 favorited The Curse of Monkey Island
+(2, 124, CURRENT_TIMESTAMP), -- user2 favorited The Curse of Monkey Island
+(3, 125, CURRENT_TIMESTAMP), -- user3 favorited Portal 2
+(3, 124, CURRENT_TIMESTAMP); -- user1 favorited The Curse of Monkey Island
+
+
+SELECT *
+FROM favorites;
+
+SELECT u.username, v.name
+FROM users as u
+INNER JOIN favorites as f ON u.id = f.id_user
+INNER JOIN videogames as v ON f.id_game = v.id
+WHERE u.username='Robinoso'
+
+
+-- QUERIES FOR TABLE WISHLISTED
+CREATE TABLE wishlisted (
+    id_user INT NOT NULL,
+    id_game INT NOT NULL,
+	date DATE NOT NULL,
+	PRIMARY KEY (id_user, id_game),
+    FOREIGN KEY (id_user) REFERENCES users(id),
+    FOREIGN KEY (id_game) REFERENCES videogames(id)
+);
+
+INSERT INTO wishlisted (id_user, id_game, date) 
+VALUES 
+(1, 124, CURRENT_TIMESTAMP), -- user1 favorited The Curse of Monkey Island
+(1, 125, CURRENT_TIMESTAMP), -- user1 favorited The Curse of Monkey Island
+(1, 126, CURRENT_TIMESTAMP), -- user1 favorited Portal 2
+(3, 124, CURRENT_TIMESTAMP); -- user3 favorited The Curse of Monkey Island
+
+
+SELECT *
+FROM wishlisted;
+
+SELECT u.username, v.name
+FROM users as u
+INNER JOIN wishlisted as w ON u.id = w.id_user
+INNER JOIN videogames as v ON w.id_game = v.id
+WHERE u.username='Bolito_92'
+
+-- QUERIES FOR TABLE COMPLETED
 CREATE TABLE completed (
     id_user INT NOT NULL,
     id_game INT NOT NULL,
 	date DATE NOT NULL,
     rating INT CHECK (rating >= 1 AND rating <= 5),
     review TEXT,
+    PRIMARY KEY (id_user, id_game),
     FOREIGN KEY (id_user) REFERENCES users(id),
     FOREIGN KEY (id_game) REFERENCES videogames(id)
 );
