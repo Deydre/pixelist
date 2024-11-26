@@ -13,14 +13,14 @@ app.use(express.json());
 // Rutas importadas
 const userRoutes = require("./routes/user.routes");
 const videogameRoutes = require("./routes/videogame.routes");
-const favoritedRoutes = require("./routes/favorited.routes");
+const favoritesRoutes = require("./routes/favorites.routes");
 const wishlistedRoutes = require("./routes/wishlisted.routes");
 const completedRoutes = require("./routes/completed.routes");
 
 // Rutas habilitadas
 app.use('/api/user', userRoutes);
 app.use('/api/videogame', videogameRoutes);
-app.use('/api/favorited', favoritedRoutes);
+app.use('/api/favorites', favoritesRoutes);
 app.use('/api/wishlisted', wishlistedRoutes);
 app.use('/api/completed', completedRoutes);
 
