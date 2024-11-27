@@ -1,4 +1,13 @@
 #home {
     display: flex;
-    background-color: red;
+}
+
+#contentHome {
+    width: 100%;
+}
+
+#contentCards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 26px;
 }

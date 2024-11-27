@@ -17,38 +17,53 @@ a {
     color: $secondary-color;
 }
 
-// button {
-//     padding: 10px 18px;
-//     border: 0px solid;
-//     border-radius: 8px;
-//     color: $white;
-//     background-color:$primary-color;
-//     transition: 0.3s;
-//     font-size: 16px;
-// }
+h6 {
+    letter-spacing: 2px;
+    font-weight: 400;
+    color: $secondary-color-soft-2;
+}
 
-// button:hover {
-//     background-color: $secondary-color;
-//     padding: 12px 20px;
-// }
+ul {
+    list-style: none;
+}
 
-// input {
-//     padding: 10px 20px;
-//     border-radius: 80px;
-//     border: 0px solid;
-//     @include shadow($shadow-color);
-// }
+button {
+    padding: 10px 18px;
+    border: 0px solid;
+    border-radius: 8px;
+    color: $secondary-color;
+    background-color:$primary-color;
+    transition: 0.3s;
+    font-size: 16px;
+}
 
-// form {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-//     flex-wrap: wrap;
-//     gap: 20px;
-//     padding-bottom: 40px;
-// }
+button:hover {
+    background-color: $secondary-color;
+    padding: 12px 20px;
+}
 
-// form input {
-//     width: 180px;
-// }
+input {
+    padding: 14px 20px;
+    border-radius: 80px;
+    border: 0px solid;
+    width: 100%;
+    color: $secondary-color-soft;
+    background: $transparent;
+    transition: background 0.4s ease;
+}
+
+input:hover, input:focus {
+    color: $primary-color;
+    background: $secondary-color;
+    outline: none;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-bottom: 40px;
+}

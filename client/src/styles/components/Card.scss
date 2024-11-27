@@ -1,0 +1,32 @@
+.cardVideogame {
+    color: $secondary-color;
+    background-color: $transparent;
+    border-radius: 8px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    width: 280px;
+    border-radius: 8px;
+
+    transition: transform 0.5s ease, background 1s ease;
+}
+
+.cardVideogame:hover{
+    transform: scale(1.06);
+    cursor: pointer;
+    background: $transparent-soft;
+}
+
+.cardVideogame div:first-child img {
+    width: auto; 
+    height: 200px;
+    display: block; 
+}
+
+.cardVideogame div:nth-child(2) {
+    padding: 20px;
+}

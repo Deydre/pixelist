@@ -2,9 +2,9 @@ import React from "react";
 
 const CategoriesBar = () => {
   return <aside id="categoriesBar">
-    <h2>Categories</h2>
+    <h6>CATEGORIES</h6>
     <ul>
-      <h4>Genres</h4>
+      <h3>Genres</h3>
       <li>
         <p>Action</p>
       </li>
@@ -19,7 +19,7 @@ const CategoriesBar = () => {
       </li>
     </ul>
     <ul>
-      <h4>Platforms</h4>
+      <h3>Platforms</h3>
       <li>
         <p>PC</p>
       </li>
