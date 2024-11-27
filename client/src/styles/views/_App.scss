@@ -1,0 +1,54 @@
+@import '../utils/variables.scss';
+@import '../utils/mixins.scss';
+
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: "DM Sans", sans-serif;
+}
+
+body {
+    color: $secondary-color;
+    background-color: $primary-color
+}
+
+a {
+    text-decoration: none;
+    color: $secondary-color;
+}
+
+// button {
+//     padding: 10px 18px;
+//     border: 0px solid;
+//     border-radius: 8px;
+//     color: $white;
+//     background-color:$primary-color;
+//     transition: 0.3s;
+//     font-size: 16px;
+// }
+
+// button:hover {
+//     background-color: $secondary-color;
+//     padding: 12px 20px;
+// }
+
+// input {
+//     padding: 10px 20px;
+//     border-radius: 80px;
+//     border: 0px solid;
+//     @include shadow($shadow-color);
+// }
+
+// form {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+//     flex-wrap: wrap;
+//     gap: 20px;
+//     padding-bottom: 40px;
+// }
+
+// form input {
+//     width: 180px;
+// }
