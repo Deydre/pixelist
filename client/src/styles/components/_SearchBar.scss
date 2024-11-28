@@ -1,3 +1,21 @@
-#searchOne {
-    flex-direction: row;
+#contentSearch {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
 }
+
+#contentSearch form {
+    flex: 1;
+}
+
+#contentSearch form input {
+    width: 100%;
+    box-sizing: border-box;
+    color: white;
+}
+
+#sortButtons {
+    display: flex;
+    gap: 10px; 
+}
+

@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const cors = require('cors');
 
 //Logger
 const morgan = require("./middlewares/morgan")
@@ -9,6 +10,7 @@ app.use(morgan(':method :url :status - :response-time ms :body'));
 
 // Habilitar la recepción de peticiones tipo JSON
 app.use(express.json());
+app.use(cors());
 
 // Rutas importadas
 const userRoutes = require("./routes/user.routes");
