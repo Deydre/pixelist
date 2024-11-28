@@ -20,8 +20,8 @@ const SearchBar = () => {
       <input type="text" name="nombre" value={values} onChange={handleChange} placeholder="🔍   Search a videogame!" required />
     </form>
     <div id="sortButtons">
-      <button id="sortAlphabetical" class="btnSort">A</button>
-      <button id="sortNewest" class="btnSort">n</button>
+      <button id="sortAlphabetical" className="btnSort">A</button>
+      <button id="sortNewest" className="btnSort">n</button>
     </div>
   </div>;
 };
