@@ -27,6 +27,35 @@
     display: block; 
 }
 
-.cardVideogame div:nth-child(2) {
+.cardVideogame > div:nth-child(2) {
     padding: 20px;
+}
+
+.gameData > div{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.containerMetacritic {
+    background-color: white;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.containerMetacritic h6 {
+    color: white;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.red {
+    color: red;
 }
