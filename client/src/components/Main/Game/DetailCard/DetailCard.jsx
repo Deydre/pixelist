@@ -1,22 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
-const Card = (game) => {
-  const navigate = useNavigate();
-  const { name, background_image, id, metacritic, slug } = game.data;
+const DetailCard = (game) => {
+  console.log(game)
+  const { name, background_image, id, metacritic } = game.data;
   let colorMetacritic;
   metacritic >= 75 ? colorMetacritic = "green" : metacritic >= 50 ? colorMetacritic = "yellow" : colorMetacritic = "red";
 
-  const details = () => {
-    navigate(`/games/${slug}`)
-  }
-
   return <>
-    <article className="cardVideogame" id={id} onClick={details} >
-      <div>
-        <img src={background_image} alt={name} />
-      </div>
-      <div className="gameData">
+    <article className="cardDetailVideogame" id={id}>
+      <div id="detailDivImg" style={{ backgroundImage: `url(${background_image})` }}>
         <div>
           <h3>{name}</h3>
           <div className={`containerMetacritic ${colorMetacritic}`}>
@@ -31,4 +23,4 @@ const Card = (game) => {
   </>;
 };
 
-export default Card;
+export default DetailCard;

@@ -1,0 +1,60 @@
+.cardDetailVideogame {
+    color: $secondary-color;
+    background-color: $transparent;
+    border-radius: 8px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    width: 100%;
+    border-radius: 8px;
+
+    transition: transform 0.5s ease, background 1s ease;
+}
+
+.cardDetailVideogame div:first-child img {
+    width: auto; 
+    height: 200px;
+    display: block; 
+}
+
+.cardDetailVideogame > div:nth-child(2) {
+    padding: 20px;
+}
+
+.gameData > div{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.containerMetacritic {
+    background-color: white;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.containerMetacritic h6 {
+    color: white;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.red {
+    color: red;
+}
+
+#detailDivImg {
+    width: 100%;
+    height: 500px;
+}
