@@ -1,0 +1,30 @@
+@import '../utils/variables.scss';
+
+#categoriesBar {
+    padding: 32px 46px 32px 0px;
+    width: 220px;
+    position: fixed;
+}
+
+#categoriesBar h3 {
+    background: $gradient1;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#categoriesBar ul {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 0px;
+}
+
+#categoriesBar li {
+    color: $secondary-color-soft
+}
+
+#categoriesBar li:hover {
+    cursor: pointer;
+    color: $secondary-color;
+}
