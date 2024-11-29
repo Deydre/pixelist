@@ -1,9 +1,7 @@
 -- QUERIES FOR TABLE USERS
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    name VARCHAR(50) NOT NULL,
-    surname VARCHAR(50) NOT NULL,
+    username VARCHAR(50) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     avatar VARCHAR(255),
@@ -13,19 +11,18 @@ CREATE TABLE users (
 SELECT *
 FROM users
 
-INSERT INTO users(username, name, surname, email, password, avatar, quote)
+INSERT INTO users(username, email, password, avatar, quote)
 VALUES 
-  ('Bolito92', 'Bolito', 'Pelusón', 'bolito@gmail.com', '123456', NULL, NULL),
-  ('Hiriosa', 'Hiria', 'Morgan', 'hiria@gmail.com', '123456', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNC4cFAuyTCaleOBwCzVOh0yQ4SrwaYOdxZA&s', 'Miau'),
-  ('Robinoso', 'Robin','Addams','robin@gmail.com', '123456', 'https://example.com/avatar_robin.png', '¡Hola mundo!');
+  ('Bolito92','bolito@gmail.com', '123456', NULL, NULL),
+  ('Hiriosa', 'hiria@gmail.com', '123456', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNC4cFAuyTCaleOBwCzVOh0yQ4SrwaYOdxZA&s', 'Miau'),
+  ('Robinoso', 'robin@gmail.com', '123456', 'https://example.com/avatar_robin.png', '¡Hola mundo!');
 
 UPDATE users
-    SET username = 'Bolito_92', name='Bolito', surname='Pelusón', password = '12234567aA', avatar = 'a', quote = 'Así es'
+    SET username = 'Bolito_92', password = '12234567aA', avatar = 'a', quote = 'Así es'
     WHERE email = 'bolito@gmail.com'
 
 SELECT *
 FROM users
-
 
 -- QUERIES FOR TABLE VIDEOGAMES
 CREATE TABLE videogames (

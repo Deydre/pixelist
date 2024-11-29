@@ -4,13 +4,14 @@ const bcrypt = require('bcryptjs');
 
 // POST (CREATE)
 const createUser = async (user) => {
-    const { username, email, password, avatar, quote } = user;
+    const { username, email, password} = user;
     let client, result;
 
     try {
         client = await pool.connect(); // Espera a abrir conexion
+        console.log("Conexión a la base de datos establecida.");
         const hashedPassword = password ? await bcrypt.hash(password, 10) : null; // Si hay contraseña, la hasheamos
-        const data = await client.query(queries.createUser, [username, email, hashedPassword, avatar, quote])
+        const data = await client.query(queries.createUser, [username, email, hashedPassword])
         result = data.rowCount
     } catch (err) {
         console.log(err);
@@ -20,6 +21,21 @@ const createUser = async (user) => {
     }
     return result
 }
+
+const login = async (email, password) => {
+    let client, result;
+    client = await pool.connect();
+    try {
+        const userExists = await client.query(queries.checkLogin, [email, password]);
+        console.log(userExists);
+        return userExists;
+
+    } catch (error) {
+        console.log(error.message);
+        throw error
+    };
+};
+
 
 // GET ALL (READ)
 const getAllUsers = async () => {
@@ -92,6 +108,7 @@ const deleteUserByEmail = async (userToDelete) => {
 
 const Users = {
     createUser,
+    login,
     getAllUsers,
     getUserByEmail,
     updateUserByEmail,
