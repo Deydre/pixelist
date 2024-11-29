@@ -1,4 +1,5 @@
 const UserModel = require('../models/user.model'); // Importar el modelo de la BBDD
+const { createToken } = require('../config/jsonWebToken');
 const { validationResult } = require("express-validator");
 
 // Crear usuario //Post
@@ -29,6 +30,28 @@ const createUser = async (req, res, next) => {
         next(error)
     }
 }
+
+
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const user = await UserModel.login(email, password);
+        if (user) {
+            const token = createToken({ email: user.email });
+            res.status(200)
+                .set('Authorization', `Bearer ${token}`)
+                .cookie('access_token', token)
+                // .json({ role: user[0].role })
+                .send()
+        } else {
+            res.status(400).json({ msg: "wrong credentials" });
+        }
+
+    } catch (error) {
+        res.status(400).json({ msg: error.message });
+    }
+};
+
 
 const getAllUsers = async (req, res) => {
     let users;
@@ -96,6 +119,7 @@ const deleteUserByEmail = async (req, res) => {
 
 module.exports = {
     createUser,
+    login,
     getAllUsers,
     getUserByEmail,
     updateUserByEmail,

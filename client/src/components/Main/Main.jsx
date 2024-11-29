@@ -9,6 +9,8 @@ import Game from './Game';
 
 
 const Main = () => {
+
+  
   return <main>
     <Routes>
       <Route path='/' element={<Home />} />

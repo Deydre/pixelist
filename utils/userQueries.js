@@ -1,8 +1,12 @@
 const queries = {
     // Crear usuario en Sign Up (avatar + quote opcionales) ("/signup")
     createUser: `
-    INSERT INTO users(username, email, password, avatar, quote)
-    VALUES ($1,$2,$3,$4, $5)
+    INSERT INTO users(username, email, password)
+    VALUES ($1,$2,$3)
+    `,
+    checkLogin: `
+    SELECT * FROM users
+    WHERE email = $1 AND password = $2
     `,
     // Lista de usuarios en la base de datos ("/users")
     getAllUsers: `
