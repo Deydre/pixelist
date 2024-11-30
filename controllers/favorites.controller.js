@@ -18,7 +18,7 @@ const getAllFavoritesFromUser = async (req, res) => {
 
 const markAsFavorite = async (req, res) => {
     try {
-        const newFavorite = req.body; // {id_user, id_game, date, rating, review}
+        const newFavorite = req.body; // {id_user, id_game, date}
         const response = await FavoritesModel.markAsFavorite(newFavorite);
         res.status(201).json({
             "items_created": response,
@@ -32,7 +32,7 @@ const markAsFavorite = async (req, res) => {
 }
 
 const unmarkAsFavorite = async (req, res) => {
-    const cancelFavorite = req.body; // {email} le pasaremos el email por el body
+    const cancelFavorite = req.body;
     try {
         const response = await FavoritesModel.unmarkAsFavorite(cancelFavorite);
         if (response) {

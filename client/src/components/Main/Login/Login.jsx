@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios';
+import { context } from "../../../context/context";
 
-const Login = (props) => {
+const Login = () => {
+
+  const { updateLogged, updateActualUser } = useContext(context);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -47,7 +51,8 @@ const Login = (props) => {
       const authHeader = response.headers.authorization;
       axios.defaults.headers.common['Authorization'] = authHeader;
 
-      props.logged.setLogged(true);
+      updateLogged(true);
+      updateActualUser(email);
 
     } catch (error) {
       console.log(error.message);
