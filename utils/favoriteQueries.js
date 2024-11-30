@@ -1,7 +1,7 @@
 const queries = {
     // Ver todos los completados de un usuario ("/profile:id")
     getAllFavoritesFromUser: `
-    SELECT u.username, v.name, v.background_image, f.date
+    SELECT u.username, v.name, v.background_image, f.date, f.id_game
     FROM users AS u
     INNER JOIN favorites AS f ON u.id = f.id_user
     INNER JOIN videogames AS v ON v.id = f.id_game

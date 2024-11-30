@@ -15,7 +15,7 @@ const GameView = () => {
   const [gameData, setGameData] = useState([]);
 
   const renderParamsCard = () => {
-    // Comprobar si el juego está en los favoritos de este user para indicárselo (lo hacemos gracias al estago globar "favsUser")
+    // Comprobar si el juego está en los favoritos de este user para indicárselo (lo hacemos gracias al estago global "favsUser")
     return <DetailCard data={gameData} key="1" />
   }
 

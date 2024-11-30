@@ -1,10 +1,10 @@
 const express = require('express');
-// Rutas de usuario
+const getAccessToken = require('../middlewares/getAccessToken');
+const decodeToken = require('../middlewares/decodeToken');
 const favoritesController = require("../controllers/favorites.controller");
 const router = express.Router();
 
 router.get("/:email", favoritesController.getAllFavoritesFromUser);
-router.post("/", favoritesController.markAsFavorite);
+router.post("/", getAccessToken, decodeToken, favoritesController.markAsFavorite);
 router.delete("/", favoritesController.unmarkAsFavorite);
-
 module.exports = router;
