@@ -52,7 +52,6 @@ const DetailCard = (game) => {
           // MARCAR COMO FAVORITO
           const date = new Date().toISOString().split('T')[0];
           // Buscar el email en el token y buscar la id en la BBDD
-          
           await axios({
             method: 'post',
             url: 'http://localhost:3000/api/favorites/',
