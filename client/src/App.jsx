@@ -9,12 +9,10 @@ import axios from "axios";
 function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
 
-  const [userData, setUserData] = useState({
-    email: "",
-  });
+  const [logged, setLogged] = useState(false);
 
-  const updateUserData = (userLogged) => {
-    setUserData([userLogged])
+  const updateLogged = (booleanLogged) => {
+    setLogged([booleanLogged])
   };
 
   // Contexto para categories porque lo van a usar los componentes CategoriesBar y Category
@@ -52,13 +50,12 @@ function App() {
   return (
     <>
       <BrowserRouter >
-        <Header />
-        <context.Provider value={{ 
-          userData, updateUserData, // Datos del usuario que simulan token
+        <context.Provider value={{
           categories, // Estado global donde siempre tendremos todas las categorías disponibles con sus juegos
           // actualCategory, updateActualCategory // Categoría actual en la que estamos
-          }}>
-
+          updateLogged
+        }}>
+          <Header />
           <Main />
         </context.Provider >
       </BrowserRouter>

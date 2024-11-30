@@ -35,19 +35,14 @@ const createUser = async (req, res, next) => {
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        console.log("EMAIL")
-        console.log(email)
+        // Comprobar que existe antes de darle el token
         const user = await UserModel.login(email, password);
         if (user) {
             const token = createToken({ email: user.email });
             res.status(200)
                 .set('Authorization', `Bearer ${token}`)
-                .cookie('access_token', token, {
-                    // httpOnly: true,  // Evita que la cookie sea accesible mediante JavaScript (seguridad)
-                    // secure: true,  // Se envía también en HTTP
-                  })
-                .json({ email: user.email })
-                .send()
+                .cookie('access_token', token)
+                .json({ msg: "User logged" })
         } else {
             res.status(400).json({ msg: "wrong credentials" });
         }
@@ -57,6 +52,17 @@ const login = async (req, res) => {
     }
 };
 
+const logout = async (req, res) => {
+    try {
+        res.status(200)
+            .set('Authorization', "")
+            .cookie('access_token', "")
+            .json({ msg: "User unlogged" })
+    } catch (error) {
+        res.status(400).json({ msg: error.message });
+
+    }
+};
 
 const getAllUsers = async (req, res) => {
     let users;
@@ -125,6 +131,7 @@ const deleteUserByEmail = async (req, res) => {
 module.exports = {
     createUser,
     login,
+    logout,
     getAllUsers,
     getUserByEmail,
     updateUserByEmail,
