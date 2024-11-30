@@ -10,10 +10,37 @@ function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
 
   const [logged, setLogged] = useState(false);
+  // Leer token, descifrar, ver email y cambiar actualUser si hace falta
+  const [actualUser, setActualUser] = useState("");
+
+  const [favsUser, setFavsUser] = useState([]);
 
   const updateLogged = (booleanLogged) => {
     setLogged([booleanLogged])
   };
+
+  const updateActualUser = (userLogged) => {
+    setActualUser([userLogged])
+  };
+
+  const updateFavsUser = (fav) => {
+    setFavsUser([fav])
+  };
+
+  // Guardar en estado los favs del usuario cuando el estado de éste cambia
+  useEffect(() => {
+    const getFavorites = async () => {
+      try {
+        if (!actualUser) return ""; 
+        let response = await axios(`http://localhost:3000/api/favorites/${actualUser}`);
+        setFavsUser(response.data);
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getFavorites();
+
+  }, [actualUser]);
 
   // Contexto para categories porque lo van a usar los componentes CategoriesBar y Category
   const [categories, setCategories] = useState([])
@@ -53,7 +80,9 @@ function App() {
         <context.Provider value={{
           categories, // Estado global donde siempre tendremos todas las categorías disponibles con sus juegos
           // actualCategory, updateActualCategory // Categoría actual en la que estamos
-          updateLogged
+          updateLogged,
+          actualUser, updateActualUser,
+          favsUser, updateFavsUser
         }}>
           <Header />
           <Main />

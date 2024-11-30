@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const NavBar = () => {
 
-  const { updateLogged } = useContext(context);
+  const { updateLogged, updateActualUser } = useContext(context);
 
   const handleLogout = async () => {
     try {
@@ -16,6 +16,7 @@ const NavBar = () => {
         withCredentials: true
       });
       updateLogged(false);
+      updateActualUser("")
     } catch (error) {
       console.log(error.message);
     }

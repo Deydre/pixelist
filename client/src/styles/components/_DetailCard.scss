@@ -28,10 +28,34 @@
     gap: 20px
 }
 
-#divData > div:first-child {
+#divData>div:first-child {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+#markers {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.divIcon {
+    color: $transparent-soft;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background-color: $transparent;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+// Diferente al resto de botones
+.divIcon:hover { 
+    color: $secondary-color;
+    background-color: $transparent-soft;
+    padding: 2px 8px;
 }
 
 .containerMetacritic {
@@ -49,9 +73,13 @@
 }
 
 .yellow {
-    color: yellow;
+    background-color: rgb(255, 157, 0);
 }
 
 .red {
-    color: red;
+    background-color: red;
+}
+
+.activeIcon {
+    color: rgb(255, 255, 255);
 }
