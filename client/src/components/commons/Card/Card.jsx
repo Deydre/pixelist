@@ -1,5 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart as fullHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart as emptyHeart } from '@fortawesome/free-regular-svg-icons';
 
 const Card = (game) => {
   const navigate = useNavigate();
@@ -26,8 +29,8 @@ const Card = (game) => {
         <p>Poner más cosas</p>
       </div>
       <div className="markers">
-        <i class="fa-regular fa-heart"></i>
-        <i class="fa-solid fa-heart"></i>
+        <FontAwesomeIcon icon={fullHeart} />
+        <FontAwesomeIcon icon={emptyHeart} />
       </div>
     </article>
   </>;
