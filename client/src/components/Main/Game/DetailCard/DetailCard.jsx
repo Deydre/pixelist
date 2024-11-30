@@ -7,7 +7,6 @@ import axios from 'axios';
 
 const DetailCard = (game) => {
 
-
   const { actualUser, favsUser, updateFavsUser } = useContext(context);
   const [ isFavorite, setIsFavorite ] = useState(false);
 
@@ -18,6 +17,14 @@ const DetailCard = (game) => {
 
   let colorMetacritic;
   metacritic >= 75 ? colorMetacritic = "green" : metacritic >= 50 ? colorMetacritic = "yellow" : colorMetacritic = "red";
+
+
+  // Comprobamos si el juego está marcado como favorito al cargar el componente
+  useEffect(() => {
+    const isAlreadyFavorite = favsUser.some(fav => fav.id_game === id_game);
+    console.log("A VER", isAlreadyFavorite);
+    setIsFavorite(isAlreadyFavorite);
+  }, [favsUser, id_game]);
 
 
   const handleFavorite = async () => {
@@ -44,7 +51,8 @@ const DetailCard = (game) => {
 
           // MARCAR COMO FAVORITO
           const date = new Date().toISOString().split('T')[0];
-          //  (habrá middlewares en la ruta por lo que comprueba el token)
+          // Buscar el email en el token y buscar la id en la BBDD
+          
           await axios({
             method: 'post',
             url: 'http://localhost:3000/api/favorites/',
@@ -52,7 +60,7 @@ const DetailCard = (game) => {
             withCredentials: true
           });
 
-          updateFavsUser([...favsUser, { id_game, name }]);
+          updateFavsUser([...favsUser, {id_game: id_game}]);
           setIsFavorite(true);
         } else {
           await axios({
@@ -60,7 +68,7 @@ const DetailCard = (game) => {
             url: 'http://localhost:3000/api/favorites/',
             data: { id_user, id_game },
           });
-          updateFavsUser(favsUser.filter(fav => fav.id_game !== id_game));
+          updateFavsUser(favsUser.filter(fav => fav.id_game !== id_game)); 
           setIsFavorite(false);
         }    
       }
@@ -91,8 +99,8 @@ const DetailCard = (game) => {
             </button>
             <button className={`divIcon ${isFavorite ? 'favorite' : ''}`}
               onClick={handleFavorite} >
-              <h6>{isFavorite ? 'UNMARK FAVORITE' : 'MARK FAVORITE'}</h6>
-              <FontAwesomeIcon icon={faHeart} size="sm" />
+              <h6>FAVORITE</h6>
+              <FontAwesomeIcon icon={faHeart} size="sm"/>
             </button>
             <div className={`containerMetacritic ${colorMetacritic}`}>
               <h6>{metacritic}</h6>
