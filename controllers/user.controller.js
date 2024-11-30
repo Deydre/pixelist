@@ -37,11 +37,10 @@ const login = async (req, res) => {
         const { email, password } = req.body;
         const user = await UserModel.login(email, password);
         if (user) {
-            const token = createToken({ email: user.email });
+            const token = createToken({ email: user[0].email });
             res.status(200)
                 .set('Authorization', `Bearer ${token}`)
                 .cookie('access_token', token)
-                // .json({ role: user[0].role })
                 .send()
         } else {
             res.status(400).json({ msg: "wrong credentials" });

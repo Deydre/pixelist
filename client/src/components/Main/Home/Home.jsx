@@ -19,7 +19,7 @@ const Home = () => {
     return videogamesList.map((game, i) => <Card data={game} key={uuidv4()} />)
   }
 
-  // FETCH INICIAL
+  // FETCH
   useEffect(() => {
     const getVideogames = async () => {
       setLoading(true);
