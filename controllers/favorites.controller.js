@@ -32,7 +32,7 @@ const markAsFavorite = async (req, res) => {
 }
 
 const unmarkAsFavorite = async (req, res) => {
-    const cancelFavorite = req.body;
+    const cancelFavorite = req.body; // {email} le pasaremos el email por el body
     try {
         const response = await FavoritesModel.unmarkAsFavorite(cancelFavorite);
         if (response) {
