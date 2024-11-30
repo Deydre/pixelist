@@ -37,21 +37,23 @@ const Login = (props) => {
       const response = await axios({
         method: 'post',
         url: 'http://localhost:3000/api/user/login',
-        data: { email, password }
+        data: { email, password },
+        withCredentials: true
       });
 
       // // Las 3 líneas que hacen la magia de que se quede guardado el rol
       // // Con el header ya se envía la cabecera con el token, no hay que manejarlo a mano
+      // En las futuras solicitudes por axios se enviará encabezado el token
       const authHeader = response.headers.authorization;
       axios.defaults.headers.common['Authorization'] = authHeader;
 
-      // props.logged.setLogged(true);
-      // setMessage(`Authorisation Header ${authHeader}`);
+      props.logged.setLogged(true);
 
     } catch (error) {
       console.log(error.message);
     }
   };
+
 
 
   //username, email, password, img

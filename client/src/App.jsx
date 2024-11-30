@@ -11,7 +11,6 @@ function App() {
 
   const [userData, setUserData] = useState({
     email: "",
-
   });
 
   const updateUserData = (userLogged) => {
@@ -59,7 +58,7 @@ function App() {
           categories, // Estado global donde siempre tendremos todas las categorías disponibles con sus juegos
           // actualCategory, updateActualCategory // Categoría actual en la que estamos
           }}>
-            
+
           <Main />
         </context.Provider >
       </BrowserRouter>

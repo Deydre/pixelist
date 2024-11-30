@@ -35,12 +35,18 @@ const createUser = async (req, res, next) => {
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
+        console.log("EMAIL")
+        console.log(email)
         const user = await UserModel.login(email, password);
         if (user) {
-            const token = createToken({ email: user[0].email });
+            const token = createToken({ email: user.email });
             res.status(200)
                 .set('Authorization', `Bearer ${token}`)
-                .cookie('access_token', token)
+                .cookie('access_token', token, {
+                    // httpOnly: true,  // Evita que la cookie sea accesible mediante JavaScript (seguridad)
+                    // secure: true,  // Se envía también en HTTP
+                  })
+                .json({ email: user.email })
                 .send()
         } else {
             res.status(400).json({ msg: "wrong credentials" });

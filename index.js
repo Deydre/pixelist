@@ -11,7 +11,10 @@ app.use(morgan(':method :url :status - :response-time ms :body'));
 
 // Habilitar la recepción de peticiones tipo JSON
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173', // URL del front
+    credentials: true
+}));
 
 // Rutas importadas
 const userRoutes = require("./routes/user.routes");
