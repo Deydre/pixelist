@@ -45,12 +45,6 @@ function App() {
   // Contexto para categories porque lo van a usar los componentes CategoriesBar y Category
   const [categories, setCategories] = useState([])
 
-  // const [actualCategory, setActualCategory] = useState("");
-
-  // const updateActualCategory = (newCategory) => {
-  //   setActualCategory([newCategory])
-  // };
-
   // FETCH
   useEffect(() => {
     const getCategory = async () => {

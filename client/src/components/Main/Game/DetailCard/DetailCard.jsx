@@ -7,18 +7,13 @@ import axios from 'axios';
 
 const DetailCard = (game) => {
 
+
   const { actualUser, favsUser, updateFavsUser } = useContext(context);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [ isFavorite, setIsFavorite ] = useState(false);
 
   // Manejo de datos que vienen por prop
   const { name, background_image, id, metacritic, description_raw } = game.data;
   let id_game = id;
-
-  useEffect(() => {
-    // Calculamos si el juego está en favoritos sólo cuando cambien favsUser o id_game
-    const booleanFavorite = favsUser.some(fav => fav.id_game === id_game);
-    setIsFavorite(booleanFavorite);
-  }, [favsUser, id_game]);
 
 
   let colorMetacritic;
@@ -30,17 +25,15 @@ const DetailCard = (game) => {
       // Llamada a la API para saber el ID del user con el email almacenado en actualUser
       const user = await axios(`http://localhost:3000/api/user/email?email=${actualUser}`);
       const id_user = user.data[0].id;
-      console.log(user)
+
       if (user) {
         // Comprobar si está en favoritos
         if (!isFavorite) {
-          // MIRAR SI YA ESTÁ EN NUESTRA BBDD
+          // MIRAR SI EL JUEGO YA ESTÁ EN NUESTRA BBDD
           const gameExists = await axios(`http://localhost:3000/api/videogame/${id_game}`);
-          console.log("GAME EXISTS")
-          console.log(gameExists)
-          // Si el juego no existe...
+
+          // SI EL JUEGO NO EXISTE, LO CREAMOS EN NUESTRA BBDD
           if (!gameExists.data) {
-            // CREAR JUEGO EN NUESTRA BBDD
             await axios({
               method: 'post',
               url: 'http://localhost:3000/api/videogame',
@@ -60,6 +53,7 @@ const DetailCard = (game) => {
           });
 
           updateFavsUser([...favsUser, { id_game, name }]);
+          setIsFavorite(true);
         } else {
           await axios({
             method: 'delete',
@@ -67,8 +61,8 @@ const DetailCard = (game) => {
             data: { id_user, id_game },
           });
           updateFavsUser(favsUser.filter(fav => fav.id_game !== id_game));
-        }
-        setIsFavorite(!isFavorite);
+          setIsFavorite(false);
+        }    
       }
 
     } catch (error) {
