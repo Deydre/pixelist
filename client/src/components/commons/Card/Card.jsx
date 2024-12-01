@@ -3,16 +3,18 @@ import { useNavigate } from "react-router-dom";
 
 const Card = (game) => {
   const navigate = useNavigate();
-  const { name, background_image, id, metacritic, slug, released, parent_platforms } = game.data;
-
+  const { name, background_image, id, metacritic, slug, released, parent_platforms, genres } = game.data;
+  console.log(game.data)
   let colorMetacritic;
   metacritic >= 75 ? colorMetacritic = "green" : metacritic >= 50 ? colorMetacritic = "yellow" : colorMetacritic = "red";
 
-  let arrayPlatforms = parent_platforms.map(platform => platform.name)
   const renderPlatforms = () => {
-    return arrayPlatforms.map((platform, i) => <p>Hola</p>)
+    return parent_platforms.map((platform, i) => <section><p>{platform.platform.name}</p></section>)
   }
 
+  const renderGenres = () => {
+    return genres.map((genre, i) => <section><p>{genre.name}</p></section>)
+  }
   const details = () => {
     navigate(`/games/${slug}`)
   }
@@ -29,9 +31,23 @@ const Card = (game) => {
             <h6>{metacritic}</h6>
           </div>
         </div>
-        <div>
-          <p><strong>Released:</strong> {released}</p>
-          {renderPlatforms}
+        <div className="cardInfoListParent">
+          <h6>PLATFORMS</h6>
+          <div className="cardInfoList">
+            {renderPlatforms()}
+          </div>
+        </div>
+        <div className="cardInfoListParent">
+          <h6>GENRES</h6>
+          <div className="cardInfoList">
+            {renderGenres()}
+          </div>
+        </div>
+        <div className="cardInfoListParent">
+          <h6>RELEASED</h6>
+          <div className="cardInfoList">
+            <p>{released}</p>
+          </div>
         </div>
       </div>
     </article>

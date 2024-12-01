@@ -8,16 +8,31 @@ import axios from 'axios';
 const DetailCard = (game) => {
 
   const { actualUser, favsUser, updateFavsUser } = useContext(context);
-  const [ isFavorite, setIsFavorite ] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   // Manejo de datos que vienen por prop
-  const { name, background_image, id, metacritic, description_raw } = game.data;
+  const { name, background_image, id, metacritic, description_raw, released, parent_platforms, genres } = game.data;
   let id_game = id;
-
+  console.log(game.data)
 
   let colorMetacritic;
   metacritic >= 75 ? colorMetacritic = "green" : metacritic >= 50 ? colorMetacritic = "yellow" : colorMetacritic = "red";
 
+  const renderPlatforms = () => {
+    return parent_platforms?.map((platform, i) => (
+      <section key={i}>
+        <p>{platform.platform.name}</p>
+      </section>
+    )) || <p>No platforms available 🤔</p>;
+  };
+
+  const renderGenres = () => {
+    return genres?.map((genre, i) => (
+      <section key={i}>
+        <p>{genre.name}</p>
+      </section>
+    )) || <p>No genres available 🤔</p>;
+  };
 
   // Comprobamos si el juego está marcado como favorito al cargar el componente
   useEffect(() => {
@@ -59,7 +74,7 @@ const DetailCard = (game) => {
             withCredentials: true
           });
 
-          updateFavsUser([...favsUser, {id_game: id_game}]);
+          updateFavsUser([...favsUser, { id_game: id_game }]);
           setIsFavorite(true);
         } else {
           await axios({
@@ -67,9 +82,9 @@ const DetailCard = (game) => {
             url: 'http://localhost:3000/api/favorites/',
             data: { id_user, id_game },
           });
-          updateFavsUser(favsUser.filter(fav => fav.id_game !== id_game)); 
+          updateFavsUser(favsUser.filter(fav => fav.id_game !== id_game));
           setIsFavorite(false);
-        }    
+        }
       }
 
     } catch (error) {
@@ -99,7 +114,7 @@ const DetailCard = (game) => {
             <button className={`divIcon ${isFavorite ? 'favorite' : ''}`}
               onClick={handleFavorite} >
               <h6>FAVORITE</h6>
-              <FontAwesomeIcon icon={faHeart} size="sm"/>
+              <FontAwesomeIcon icon={faHeart} size="sm" />
             </button>
             <div className={`containerMetacritic ${colorMetacritic}`}>
               <h6>{metacritic}</h6>
@@ -108,6 +123,24 @@ const DetailCard = (game) => {
         </div>
         <div>
           <p>{description_raw}</p>
+        </div>
+        <div className="cardInfoListParent">
+          <h6>PLATFORMS</h6>
+          <div className="cardInfoList">
+            {renderPlatforms()}
+          </div>
+        </div>
+        <div className="cardInfoListParent">
+          <h6>GENRES</h6>
+          <div className="cardInfoList">
+            {renderGenres()}
+          </div>
+        </div>
+        <div className="cardInfoListParent">
+          <h6>RELEASED</h6>
+          <div className="cardInfoList">
+            <p>{released}</p>
+          </div>
         </div>
       </div>
 
