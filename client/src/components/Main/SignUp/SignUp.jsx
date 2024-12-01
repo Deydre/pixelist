@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import HashLoader from "react-spinners/HashLoader";
 
-const SignUp = (props) => {
+const SignUp = () => {
+
+  const [loading, setLoading] = useState(false);
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -34,10 +39,8 @@ const SignUp = (props) => {
   const handlePassword = (e) => setPassword(e.target.value);
 
   const handleRegister = async () => {
+    setLoading(true);
     try {
-      console.log(username)
-      console.log(email)
-      console.log(password)
       const request = await axios({
         method: 'post',
         url: 'http://localhost:3000/api/user/signup',
@@ -47,7 +50,7 @@ const SignUp = (props) => {
       if (request.status === 201) {
         setMessage(`user: ${email} was successfully registered`);
         setTimeout(() => setMessage(""), 3000);
-      }else {
+      } else {
         setMessage(request.data.msg);
       }
 
@@ -55,21 +58,32 @@ const SignUp = (props) => {
       console.error("Error:", error); // ++
       res.status(500).json({ error: error.message || 'Internal server error' });
       next(error);
-  }
+    }
+    setLoading(false);
   };
 
 
   //username, email, password, img
 
-  return <div className="register">
-    <input type="text" placeholder="username" onChange={handleUsername} /><br />
-    <input type="text" placeholder="email" onChange={handleEmail} /><br />
-    <input type="password" placeholder="password" onChange={handlePassword} /><br />
+  return <div className="signUp">
 
-    <button onClick={handleRegister}>Register</button><br />
-    {emailMessage ? <span>{emailMessage}</span> : ""}<br />
-    {passwordMessage ? <span>{passwordMessage}</span> : ""}<br />
-    <span>{message}</span><br />
+    <article id="divSignUp">
+      <div>
+        <h2>Sign Up 🎮</h2>
+      </div>
+      <div>
+        <input type="text" placeholder="username" onChange={handleUsername} /><br />
+        <input type="text" placeholder="email" onChange={handleEmail} /><br />
+        <input type="password" placeholder="password" onChange={handlePassword} /><br />
+
+        <button onClick={handleRegister}>Register</button>
+        {emailMessage ? <span>{emailMessage}</span> : ""}
+        {passwordMessage ? <span>{passwordMessage}</span> : ""}
+        <span>{message}</span>
+      </div>
+      {loading ? ( <HashLoader color="#fff" />) : ""}
+    </article>
+    
   </div>;
 
 };

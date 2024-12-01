@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import HashLoader from "react-spinners/HashLoader";
 import { context } from "../../../context/context";
 
 const Login = () => {
 
+  const navigate = useNavigate();
   const { updateProfile } = useContext(context);
+  const [loading, setLoading] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,10 +36,15 @@ const Login = () => {
     }
   }, [password])
 
+  const loginRedirect = () => {
+    navigate(`/`)
+  }
+
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
 
   const handleLogin = async () => {
+    setLoading(true);
     try {
       // Llamada a la api con los datos del form para hacer login
       const response = await axios({
@@ -51,11 +60,13 @@ const Login = () => {
       const authHeader = response.headers.authorization;
       axios.defaults.headers.common['Authorization'] = authHeader;
 
-      updateProfile({email: email});
+      updateProfile({ email: email });
+      loginRedirect();
 
     } catch (error) {
       console.log(error.message);
     }
+    setLoading(false);
   };
 
 
@@ -63,13 +74,26 @@ const Login = () => {
   //username, email, password, img
 
   return <div className="login">
-    <input type="text" placeholder="email" onChange={handleEmail} /><br />
-    <input type="password" placeholder="password" onChange={handlePassword} /><br />
+    {loading ? (
+      <HashLoader color="#fff" />
+    ) : (
+      <>
+        <article id="divLogin">
+          <div>
+            <h2>Login 🎮</h2>
+          </div>
+          <div>
+            <input type="text" placeholder="email" onChange={handleEmail} /><br />
+            <input type="password" placeholder="password" onChange={handlePassword} /><br />
+            <button onClick={handleLogin}>LOGIN</button><br />
+            {emailMessage && <span>{emailMessage}</span>}<br />
+            {passwordMessage && <span>{passwordMessage}</span>}<br />
+            <span>{message}</span><br />
+          </div>
+        </article>
 
-    <button onClick={handleLogin}>Login</button><br />
-    {emailMessage ? <span>{emailMessage}</span> : ""}<br />
-    {passwordMessage ? <span>{passwordMessage}</span> : ""}<br />
-    <span>{message}</span><br />
+      </>
+    )}
   </div>;
 
 };
