@@ -26,7 +26,8 @@ const ProfileView = () => {
 
     getProfile();
   }, []);
-
+ 
+  
   if (loading) {
     // Muestra el spinner mientras carga
     return (
