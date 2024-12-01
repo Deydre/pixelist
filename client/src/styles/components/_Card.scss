@@ -1,0 +1,89 @@
+.cardVideogame {
+    color: $secondary-color;
+    background-color: $transparent;
+    border-radius: 8px;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 280px;
+    border-radius: 8px;
+
+    transition: transform 0.5s ease, background 1s ease;
+}
+
+.cardVideogame:hover{
+    transform: scale(1.06);
+    cursor: pointer;
+    background: $transparent-soft;
+}
+
+.cardVideogame div:first-child img {
+    width: auto; 
+    height: 200px;
+    display: block; 
+}
+
+.cardVideogame > div:nth-child(2) {
+    padding: 20px;
+}
+
+.gameData {
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+
+.gameData div:first-child{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.containerMetacritic {
+    background-color: white;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.containerMetacritic h6 {
+    color: white;
+}
+
+.cardInfoListParent {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cardInfoList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.cardInfoList section{
+    background-color: $transparent;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+.cardInfoList p {
+    color: rgba(255, 255, 255, 0.556);
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.red {
+    color: red;
+}
