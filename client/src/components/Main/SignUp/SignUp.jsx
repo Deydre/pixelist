@@ -25,10 +25,12 @@ const SignUp = () => {
     }
   }, [email])
 
+  
   useEffect(() => {
-    const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$/
+    const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/
     if (!passwordValidation.test(password) && password.length > 0) {
-      setPasswordMessage("Password must contain lowercase, uppercase, digit and special character");
+      setPasswordMessage("Password must contain lowercase letters, uppercase letters, digits, and be at least 8 characters long.");
+
     } else {
       setPasswordMessage("");
     }
@@ -72,9 +74,9 @@ const SignUp = () => {
         <h2>Sign Up 🎮</h2>
       </div>
       <div>
-        <input type="text" placeholder="username" onChange={handleUsername} /><br />
-        <input type="text" placeholder="email" onChange={handleEmail} /><br />
-        <input type="password" placeholder="password" onChange={handlePassword} /><br />
+        <input type="text" placeholder="username" onChange={handleUsername} />
+        <input type="text" placeholder="email" onChange={handleEmail} />
+        <input type="password" placeholder="password" onChange={handlePassword} />
 
         <button onClick={handleRegister}>Register</button>
         {emailMessage ? <span>{emailMessage}</span> : ""}
