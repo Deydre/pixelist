@@ -28,9 +28,9 @@ const Login = () => {
   }, [email])
 
   useEffect(() => {
-    const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).{8,}$/
+    const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/
     if (!passwordValidation.test(password) && password.length > 0) {
-      setPasswordMessage("Password must contain lowercase, uppercase, digit and special character");
+      setPasswordMessage("Password must contain lowercase letters, uppercase letters, digits, and be at least 8 characters long.");
     } else {
       setPasswordMessage("");
     }
@@ -83,12 +83,12 @@ const Login = () => {
             <h2>Login 🎮</h2>
           </div>
           <div>
-            <input type="text" placeholder="email" onChange={handleEmail} /><br />
-            <input type="password" placeholder="password" onChange={handlePassword} /><br />
-            <button onClick={handleLogin}>LOGIN</button><br />
-            {emailMessage && <span>{emailMessage}</span>}<br />
-            {passwordMessage && <span>{passwordMessage}</span>}<br />
-            <span>{message}</span><br />
+            <input type="text" placeholder="email" onChange={handleEmail} />
+            <input type="password" placeholder="password" onChange={handlePassword} />
+            <button onClick={handleLogin}>LOGIN</button>
+            {emailMessage && <span>{emailMessage}</span>}
+            {passwordMessage && <span>{passwordMessage}</span>}
+            <span>{message}</span>
           </div>
         </article>
 
