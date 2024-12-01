@@ -11,9 +11,6 @@ const ProfileView = () => {
 
   const [loading, setLoading] = useState(true);
 
-  console.log(favsUser)
-
-
   const renderCategories = () => {
     return favsUser.map((fav, i) => (
       <div className="favProfile" >

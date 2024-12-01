@@ -36,6 +36,7 @@ function App() {
         const response = await axios(`http://localhost:3000/api/user/me`, {
           withCredentials: true
         });
+        console.log(response)
         setProfile(response.data[0])
       } catch {
         console.log("Aún no se ha cargado el user o no hay user")
