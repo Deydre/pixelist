@@ -8,12 +8,12 @@ import axios from 'axios';
 const DetailCard = (game) => {
 
   const { actualUser, favsUser, updateFavsUser } = useContext(context);
+  const [profile, setProfile] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
 
   // Manejo de datos que vienen por prop
   const { name, background_image, id, metacritic, description_raw, released, parent_platforms, genres } = game.data;
   let id_game = id;
-  console.log(game.data)
 
   let colorMetacritic;
   metacritic >= 75 ? colorMetacritic = "green" : metacritic >= 50 ? colorMetacritic = "yellow" : colorMetacritic = "red";
@@ -35,12 +35,21 @@ const DetailCard = (game) => {
   };
 
   // Comprobamos si el juego está marcado como favorito al cargar el componente
+// Comprobamos el usuario
   useEffect(() => {
-    const isAlreadyFavorite = favsUser.some(fav => fav.id_game === id_game);
-    console.log("A VER", isAlreadyFavorite);
-    setIsFavorite(isAlreadyFavorite);
-  }, [favsUser, id_game]);
+    const getProfile = async () => {
+      try {
+        const response = await axios(`http://localhost:3000/api/user/me`, {
+          withCredentials: true
+        });
+        setProfile(response.data[0].email)
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
+    getProfile();
+  }, []);
 
   const handleFavorite = async () => {
     try {
