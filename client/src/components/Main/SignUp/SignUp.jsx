@@ -79,9 +79,9 @@ const SignUp = () => {
         <input type="password" placeholder="password" onChange={handlePassword} />
 
         <button onClick={handleRegister}>Register</button>
-        {emailMessage ? <span>{emailMessage}</span> : ""}
-        {passwordMessage ? <span>{passwordMessage}</span> : ""}
-        <span>{message}</span>
+        {emailMessage ? <h6>{emailMessage}</h6> : ""}
+        {passwordMessage ? <h6>{passwordMessage}</h6> : ""}
+        <h6>{message}</h6>
       </div>
       {loading ? ( <HashLoader color="#fff" />) : ""}
     </article>

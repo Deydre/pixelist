@@ -86,9 +86,9 @@ const Login = () => {
             <input type="text" placeholder="email" onChange={handleEmail} />
             <input type="password" placeholder="password" onChange={handlePassword} />
             <button onClick={handleLogin}>LOGIN</button>
-            {emailMessage && <span>{emailMessage}</span>}
-            {passwordMessage && <span>{passwordMessage}</span>}
-            <span>{message}</span>
+            {emailMessage && <h6>{emailMessage}</h6>}
+            {passwordMessage && <h6>{passwordMessage}</h6>}
+            <h6>{message}</h6>
           </div>
         </article>
 
