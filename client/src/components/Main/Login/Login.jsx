@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import HashLoader from "react-spinners/HashLoader";
 import { context } from "../../../context/context";
 
-const Login = () => {
+const Login = () => { 
 
   const navigate = useNavigate();
   const { updateProfile } = useContext(context);
@@ -60,7 +60,7 @@ const Login = () => {
       const authHeader = response.headers.authorization;
       axios.defaults.headers.common['Authorization'] = authHeader;
 
-      updateProfile(response.data)
+      updateProfile( {email: email})
       loginRedirect();
 
     } catch (error) {
