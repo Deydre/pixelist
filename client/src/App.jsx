@@ -8,39 +8,67 @@ import axios from "axios";
 function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
 
-  const [logged, setLogged] = useState(false);
-
-  const [actualUser, setActualUser] = useState("");
-
   const [favsUser, setFavsUser] = useState([]);
 
-  const updateLogged = (booleanLogged) => {
-    setLogged([booleanLogged])
-  };
+  const [profile, setProfile] = useState(null);
 
-  const updateActualUser = (userLogged) => {
-    setActualUser([userLogged])
+  // Para login y logout
+  const updateProfile = (data) => {
+    setProfile(data)
   };
+  
 
-  const updateFavsUser = (fav) => {
-    setFavsUser([fav])
-  };
-
-  // Guardar en estado los favs del usuario cuando el estado de éste cambia
   useEffect(() => {
+    // Comprobamos el user mediante su token con la ruta habilitada para ello
+    const getProfile = async () => {
+      try {
+        const response = await axios(`http://localhost:3000/api/user/me`, {
+          withCredentials: true
+        });
+        setProfile(response.data[0])
+        console.log(response)
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getProfile();
+  }, []);
+
+  useEffect(() => {
+    // Guardamos sus favoritos
     const getFavorites = async () => {
       try {
-        if (!actualUser) return ""; 
-        let response = await axios(`http://localhost:3000/api/favorites/${actualUser}`);
-        setFavsUser(response.data);
+        if (profile) {
+          let response = await axios(`http://localhost:3000/api/favorites/${profile}`);
+          setFavsUser(response.data);
+        }
       } catch (err) {
         console.log(err)
       }
     }
     getFavorites();
+  }, []);
 
-  }, [actualUser]);
+  useEffect(() => {
+    // Guardamos sus favoritos
+    const getFavorites = async () => {
+      try {
+        if (profile) {
+          let response = await axios(`http://localhost:3000/api/favorites/${profile}`);
+          setFavsUser(response.data);
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getFavorites();
+  }, [profile]);
 
+
+  const updateFavsUser = (fav) => {
+    setFavsUser([fav])
+  };
+  
   // Contexto para categories porque lo van a usar los componentes CategoriesBar y Category
   const [categories, setCategories] = useState([])
 
@@ -73,8 +101,8 @@ function App() {
         <context.Provider value={{
           categories, // Estado global donde siempre tendremos todas las categorías disponibles con sus juegos
           // actualCategory, updateActualCategory // Categoría actual en la que estamos
-          updateLogged,
-          actualUser, updateActualUser,
+          // updateLogged,
+          profile, updateProfile,
           favsUser, updateFavsUser
         }}>
           <Header />

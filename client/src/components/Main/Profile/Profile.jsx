@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { context } from "../../../context/context"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import HashLoader from "react-spinners/HashLoader";
@@ -6,35 +7,29 @@ import axios from "axios";
 
 const ProfileView = () => {
 
-  const [profile, setProfile] = useState(null);
+  const { profile } = useContext(context);
+  // const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const getProfile = async () => {
-      setLoading(true);
-      try {
-        const response = await axios(`http://localhost:3000/api/user/me`, {
-          withCredentials: true
-        });
-        setProfile(response.data[0])
-        console.log(response)
-      } catch (err) {
-        console.log(err);
-      }
-      setLoading(false);
-    };
+  // useEffect(() => {
+  //   const getProfile = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const response = await axios(`http://localhost:3000/api/user/me`, {
+  //         withCredentials: true
+  //       });
+  //       setProfile(response.data[0])
+  //       console.log(response)
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //     setLoading(false);
+  //   };
 
-    getProfile();
-  }, []);
+  //   getProfile();
+  // }, []);
 
-  if (loading) {
-    // Muestra el spinner mientras carga
-    return (
-      <section id="sectionUser">
-        <HashLoader color="#fff" />
-      </section>
-    );
-  } else if (profile) {
+  if (profile) {
     return <section id="sectionUser">
       <article className="cardUser">
         <div>

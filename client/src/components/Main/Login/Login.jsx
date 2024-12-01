@@ -4,7 +4,7 @@ import { context } from "../../../context/context";
 
 const Login = () => {
 
-  const { updateLogged, updateActualUser } = useContext(context);
+  const { updateProfile } = useContext(context);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,8 +51,7 @@ const Login = () => {
       const authHeader = response.headers.authorization;
       axios.defaults.headers.common['Authorization'] = authHeader;
 
-      updateLogged(true);
-      updateActualUser(email);
+      updateProfile(email);
 
     } catch (error) {
       console.log(error.message);

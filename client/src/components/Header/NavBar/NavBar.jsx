@@ -8,20 +8,19 @@ import axios from 'axios';
 
 const NavBar = () => {
 
-  const { updateLogged, updateActualUser } = useContext(context);
+  const { updateProfile } = useContext(context);
 
   const handleLogout = async () => {
-    try {
-      await axios({
-        method: 'get',
-        url: 'http://localhost:3000/api/user/logout',
-        withCredentials: true
-      });
-      updateLogged(false);
-      updateActualUser("")
-    } catch (error) {
-      console.log(error.message);
-    }
+      try {
+        await axios({
+          method: 'get',
+          url: 'http://localhost:3000/api/user/logout',
+          withCredentials: true
+        });
+        updateProfile("")
+      } catch (error) {
+        console.log(error.message);
+      }
   };
 
   return <nav id="navBar">
