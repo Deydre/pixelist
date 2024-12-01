@@ -7,16 +7,24 @@ import axios from 'axios';
 
 const DetailCard = (game) => {
 
-  const { actualUser, favsUser, updateFavsUser } = useContext(context);
+  const { profile, favsUser, updateFavsUser } = useContext(context);
   const [isFavorite, setIsFavorite] = useState(false);
+
+  const id_user = profile.id;
 
   // Manejo de datos que vienen por prop
   const { name, background_image, id, metacritic, description_raw, released, parent_platforms, genres } = game.data;
   let id_game = id;
-  console.log(game.data)
 
   let colorMetacritic;
   metacritic >= 75 ? colorMetacritic = "green" : metacritic >= 50 ? colorMetacritic = "yellow" : colorMetacritic = "red";
+
+
+  // Comprobar si el juego es favorito
+  useEffect(() => {
+    const isFav = favsUser.some((fav) => fav.id_game === id_game);
+    setIsFavorite(isFav);
+  }, []);
 
   const renderPlatforms = () => {
     return parent_platforms?.map((platform, i) => (
@@ -35,25 +43,16 @@ const DetailCard = (game) => {
   };
 
   // Comprobamos si el juego está marcado como favorito al cargar el componente
-  useEffect(() => {
-    const isAlreadyFavorite = favsUser.some(fav => fav.id_game === id_game);
-    console.log("A VER", isAlreadyFavorite);
-    setIsFavorite(isAlreadyFavorite);
-  }, [favsUser, id_game]);
-
-
   const handleFavorite = async () => {
     try {
-      // Llamada a la API para saber el ID del user con el email almacenado en actualUser
-      const user = await axios(`http://localhost:3000/api/user/email?email=${actualUser}`);
-      const id_user = user.data[0].id;
-
-      if (user) {
-        // Comprobar si está en favoritos
+      if (profile) {
+        
         if (!isFavorite) {
+          // COMPROBAMOS SI ES FAVORITO
+          const favsUser = await axios(`http://localhost:3000/api/favorites/${profile.email}`);
+          console.log(favsUser)
           // MIRAR SI EL JUEGO YA ESTÁ EN NUESTRA BBDD
           const gameExists = await axios(`http://localhost:3000/api/videogame/${id_game}`);
-
           // SI EL JUEGO NO EXISTE, LO CREAMOS EN NUESTRA BBDD
           if (!gameExists.data) {
             await axios({
@@ -62,6 +61,9 @@ const DetailCard = (game) => {
               data: { id, name, background_image },
               withCredentials: true
             });
+            console.log("Juego creado en la BBDD: " + name);
+          } else {
+            console.log("Juego ya estaba creado en la BBDD: " + name);
           }
 
           // MARCAR COMO FAVORITO
@@ -74,16 +76,20 @@ const DetailCard = (game) => {
             withCredentials: true
           });
 
-          updateFavsUser([...favsUser, { id_game: id_game }]);
+          updateFavsUser(); 
           setIsFavorite(true);
+          console.log("Marcando como favorito, id_game:", id_game);
+          // Hasta aquí bien-------------------------------------
         } else {
           await axios({
             method: 'delete',
             url: 'http://localhost:3000/api/favorites/',
             data: { id_user, id_game },
+            withCredentials: true
           });
-          updateFavsUser(favsUser.filter(fav => fav.id_game !== id_game));
+          updateFavsUser();
           setIsFavorite(false);
+          console.log("Desmarcando como favorito, id_game:", id_game);
         }
       }
 
@@ -102,7 +108,8 @@ const DetailCard = (game) => {
       <div id="divData">
         <div>
           <h2>{name}</h2>
-          <article id="markers">
+          {profile ? (<>
+            <article id="markers">
             <button className="divIcon" >
               <h6>COMPLETED</h6>
               <FontAwesomeIcon icon={faSquareCheck} size="sm" />
@@ -120,6 +127,7 @@ const DetailCard = (game) => {
               <h6>{metacritic}</h6>
             </div>
           </article>
+          </>) : null}
         </div>
         <div>
           <p>{description_raw}</p>

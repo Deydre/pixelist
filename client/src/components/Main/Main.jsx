@@ -15,7 +15,7 @@ const Main = () => {
       <Route path='/' element={<Home />} />
       <Route path='/signup' element={<SignUp />} />
       <Route path='/login' element={<Login />} />
-      <Route path='/profile/:username' element={<Profile />} />
+      <Route path='/profile/' element={<Profile />} />
       <Route path='/categories/:category' element={<Category />} />
       <Route path='/games/:game' element={<Game />} />
       <Route path='/*' element={<Home />} />
