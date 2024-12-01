@@ -4,6 +4,7 @@ import CategoriesBar from "../../commons/CategoriesBar/CategoriesBar";
 import SearchBar from "../../commons/searchBar";
 import DetailCard from "./DetailCard/DetailCard";
 import { context } from "../../../context/context";
+import HashLoader from "react-spinners/HashLoader";
 import axios from "axios";
 
 const GameView = () => {
@@ -22,12 +23,14 @@ const GameView = () => {
   // FETCH DEL PARAM
   useEffect(() => {
     const getGame = async () => {
+      setLoading(true);
       try {
         const resp = await axios.get(`https://api.rawg.io/api/games/${routeParams.game}?key=${apiKey}`);
         setGameData(resp.data)
       } catch (err) {
         console.log(err)
       }
+      setLoading(false);
     }
     getGame();
   }, []);
@@ -37,8 +40,12 @@ const GameView = () => {
     <div id="contentGame">
       <SearchBar />
       <section id="contentCard">
-        {renderParamsCard()}
-      </section>
+          {loading ? ( 
+            <HashLoader color="#fff" /> // Mostrar spinner mientras carga
+          ) : (
+            renderParamsCard()
+          )}
+        </section>
     </div>
   </section>;
 };
