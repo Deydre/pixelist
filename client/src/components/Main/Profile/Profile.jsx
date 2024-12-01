@@ -26,7 +26,7 @@ const ProfileView = () => {
     try {
       let id_user = profile.id
       // Borramos primero todos los favoritos del usuario
-      const responseDeleteFavs = await axios({
+      await axios({
         method: 'delete',
         url: `http://localhost:3000/api/favorites/all`,
         data: { id_user },
@@ -34,7 +34,7 @@ const ProfileView = () => {
       });
 
       // Llamada a la api para borrar user
-      const responseDeleteUser = await axios({
+      await axios({
         method: 'delete',
         url: `http://localhost:3000/api/user/email?email=${profile.email}`,
         withCredentials: true
