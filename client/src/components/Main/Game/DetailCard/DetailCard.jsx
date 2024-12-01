@@ -108,7 +108,8 @@ const DetailCard = (game) => {
       <div id="divData">
         <div>
           <h2>{name}</h2>
-          <article id="markers">
+          {profile ? (<>
+            <article id="markers">
             <button className="divIcon" >
               <h6>COMPLETED</h6>
               <FontAwesomeIcon icon={faSquareCheck} size="sm" />
@@ -126,6 +127,7 @@ const DetailCard = (game) => {
               <h6>{metacritic}</h6>
             </div>
           </article>
+          </>) : null}
         </div>
         <div>
           <p>{description_raw}</p>

@@ -15,8 +15,15 @@
     gap: 20px;
 }
 
-#navBar li {
+.nav-link, #navBar a {
+    color: $secondary-color-soft;
     font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+#navBar li:hover, #navBar a:hover {
+    color: white;
+    cursor: pointer;
 }
 
 #navBar div {
