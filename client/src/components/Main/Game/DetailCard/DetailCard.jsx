@@ -3,12 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faGift, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { context } from "../../../../context/context";
 import axios from 'axios';
+import HashLoader from "react-spinners/HashLoader";
 
 
 const DetailCard = (game) => {
 
   const { profile, favsUser, updateFavsUser } = useContext(context);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const id_user = profile.id;
 
@@ -44,6 +46,7 @@ const DetailCard = (game) => {
 
   // Comprobamos si el juego está marcado como favorito al cargar el componente
   const handleFavorite = async () => {
+    setLoading(true);
     try {
       if (profile) {
         
@@ -96,6 +99,7 @@ const DetailCard = (game) => {
     } catch (error) {
       console.log(error.message);
     }
+    setLoading(false);
 
   };
 
@@ -118,11 +122,20 @@ const DetailCard = (game) => {
               <h6>WISHLISTED</h6>
               <FontAwesomeIcon icon={faGift} size="sm" />
             </button>
-            <button className={`divIcon ${isFavorite ? 'favorite' : ''}`}
-              onClick={handleFavorite} >
-              <h6>FAVORITE</h6>
-              <FontAwesomeIcon icon={faHeart} size="sm" />
-            </button>
+            <button
+                className={`divIcon ${isFavorite ? 'favorite' : ''}`}
+                onClick={handleFavorite}
+                disabled={loading} // Desactivar el botón mientras se está cargando
+              >
+                {loading ? (
+                  <HashLoader color="#fff" size={20} /> // Muestra el spinner mientras se está cargando
+                ) : (
+                  <>
+                    <h6>FAVORITE</h6>
+                    <FontAwesomeIcon icon={faHeart} size="sm" />
+                  </>
+                )}
+              </button>
             <div className={`containerMetacritic ${colorMetacritic}`}>
               <h6>{metacritic}</h6>
             </div>
