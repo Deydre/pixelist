@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config();
 const SECRET = process.env.MY_TOKEN_SECRET
 const jwt = require('jsonwebtoken');
 
@@ -6,6 +7,7 @@ const decodeToken = express.Router();
 
 decodeToken.use(async (req, res, next) => {
     console.log("Encoded Token", req.token);
+    console.log({SECRET})
     if (req.token) {
         jwt.verify(req.token, SECRET, (err, decoded) => {
             if (err) {

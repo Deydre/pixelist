@@ -38,7 +38,7 @@ const login = async (req, res) => {
         // Comprobar que existe antes de darle el token
         const user = await UserModel.login(email, password);
         if (user) {
-            const token = createToken({ email: user.email });
+            const token = createToken({ email: email });
             res.status(200)
                 .set('Authorization', `Bearer ${token}`)
                 .cookie('access_token', token)
@@ -72,7 +72,8 @@ const getAllUsers = async (req, res) => {
 }
 
 const getUserByEmail = async (req, res) => {
-    const { email } = req.query;
+    const email = req.token.email;
+
     try {
         const userData = await UserModel.getUserByEmail(email);
         if (userData && userData.length > 0) {

@@ -6,7 +6,7 @@ getAccessToken.use(async (req, res, next) => {
     const { cookie, authorization } = req.headers;
 
     //Check authorization header
-    if (authorization.includes(`Bearer`)) {
+    if (authorization?.includes(`Bearer`)) {
         const token = authorization.split(' ')[1];
         if (token) {
             req.token = token;
