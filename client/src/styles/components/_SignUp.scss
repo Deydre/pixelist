@@ -1,0 +1,36 @@
+.signUp {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#divSignUp {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    width: 220px;
+}
+
+
+#divSignUp div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#divSignUp button {
+    padding: 10px 18px;
+    border: 0px solid;
+    border-radius: 8px;
+    color: $primary-color;
+    background-color:$secondary-color-soft;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+#divSignUp button:hover {
+    background-color: $secondary-color;
+    padding: 10px 18px;
+}

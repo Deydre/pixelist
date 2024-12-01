@@ -21,12 +21,8 @@ const SearchBar = () => {
 
   return <div id="contentSearch">
     <form onSubmit={handleSubmit}>
-      <input type="text" name="nombre" value={values} onChange={handleChange} placeholder="🔍   Search a videogame!" required />
+      <input type="text" name="nombre" value={values} onChange={handleChange} placeholder="🔍   Search for a videogame!" required />
     </form>
-    <div id="sortButtons">
-      <button id="sortAlphabetical" className="btnSort">A</button>
-      <button id="sortNewest" className="btnSort">n</button>
-    </div>
   </div>;
 };
 
