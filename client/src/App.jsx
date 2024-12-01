@@ -18,14 +18,14 @@ function App() {
   };
 
   // Para recargar favoritos
-  const updateFavsUser = async() => {
+  const updateFavsUser = async () => {
     try {
       if (profile.email) {
         let response = await axios(`http://localhost:3000/api/favorites/${profile.email}`);
         setFavsUser(response.data);
       }
-    } catch (err) {
-      console.log(err)
+    } catch {
+      console.log("Aún no se han cargado los favoritos del usuario")
     }
   };
 
@@ -37,9 +37,8 @@ function App() {
           withCredentials: true
         });
         setProfile(response.data[0])
-        console.log(response)
-      } catch (err) {
-        console.log(err);
+      } catch {
+        console.log("Aún no se ha cargado el user o no hay user")
       }
     };
     getProfile();
@@ -54,7 +53,7 @@ function App() {
           setFavsUser(response.data);
         }
       } catch (err) {
-        console.log(err)
+        console.log("Aún no se han cargado los favoritos del usuario")
       }
     }
     getFavorites();
@@ -69,7 +68,7 @@ function App() {
           setFavsUser(response.data);
         }
       } catch (err) {
-        console.log(err)
+        console.log("Aún no se han cargado los favoritos del usuario")
       }
     }
     getFavorites();
@@ -102,7 +101,6 @@ function App() {
     }
     getCategory();
   }, []);
-  console.log(favsUser)
   return (
     <>
       <BrowserRouter >

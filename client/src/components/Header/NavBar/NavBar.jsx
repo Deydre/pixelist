@@ -30,7 +30,7 @@ const NavBar = () => {
         <li className="nav-link active"><Link to='/signup'>SIGN UP</Link></li>
         <li className="nav-link active"><Link to='/login'>LOGIN</Link></li>
         <li className="nav-link active"><button onClick={handleLogout}>LOGOUT</button></li>
-        <li className="nav-link active"><Link to='/profile/:username'><FontAwesomeIcon icon={faUser} size="sm" /></Link></li>
+        <li className="nav-link active"><Link to='/profile/'><FontAwesomeIcon icon={faUser} size="sm" /></Link></li>
       </div>
 
     </ul>
