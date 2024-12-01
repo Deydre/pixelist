@@ -16,7 +16,18 @@ function App() {
   const updateProfile = (data) => {
     setProfile(data)
   };
-  
+
+  // Para recargar favoritos
+  const updateFavsUser = async() => {
+    try {
+      if (profile.email) {
+        let response = await axios(`http://localhost:3000/api/favorites/${profile.email}`);
+        setFavsUser(response.data);
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  };
 
   useEffect(() => {
     // Comprobamos el user mediante su token con la ruta habilitada para ello
@@ -65,10 +76,7 @@ function App() {
   }, [profile]);
 
 
-  const updateFavsUser = (fav) => {
-    setFavsUser([fav])
-  };
-  
+
   // Contexto para categories porque lo van a usar los componentes CategoriesBar y Category
   const [categories, setCategories] = useState([])
 
@@ -94,7 +102,7 @@ function App() {
     }
     getCategory();
   }, []);
-
+  console.log(favsUser)
   return (
     <>
       <BrowserRouter >
