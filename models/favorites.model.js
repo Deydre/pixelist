@@ -51,11 +51,29 @@ const unmarkAsFavorite = async (cancelFavorite) => {
     return result;
 };
 
+const deleteFavoritesFromUser = async (cancelFavorite) => {
+    let { id_user } = cancelFavorite
+    let client, result;
+    try {
+        client = await pool.connect();
+        const data = await client.query(queries.deleteFavoritesFromUser, [id_user]);
+        result = data.rowCount
+
+    } catch (err) {
+        console.log('Error unmarking favorite game:', err);
+        throw err;
+    } finally {
+        client.release();
+    }
+    return result;
+};
+
 
 const Favorites = {
     getAllFavoritesFromUser,
     markAsFavorite,
-    unmarkAsFavorite
+    unmarkAsFavorite,
+    deleteFavoritesFromUser
 }
 
 module.exports = Favorites;

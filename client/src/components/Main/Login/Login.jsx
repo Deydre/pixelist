@@ -60,7 +60,7 @@ const Login = () => {
       const authHeader = response.headers.authorization;
       axios.defaults.headers.common['Authorization'] = authHeader;
 
-      updateProfile({ email: email });
+      updateProfile(response.data)
       loginRedirect();
 
     } catch (error) {

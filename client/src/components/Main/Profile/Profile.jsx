@@ -11,9 +11,6 @@ const ProfileView = () => {
 
   const [loading, setLoading] = useState(true);
 
-  console.log(favsUser)
-
-
   const renderCategories = () => {
     return favsUser.map((fav, i) => (
       <div className="favProfile" >
@@ -24,24 +21,59 @@ const ProfileView = () => {
   }
 
 
+  const deleteUser = async () => {
+    setLoading(true);
+    try {
+      let id_user = profile.id
+      // Borramos primero todos los favoritos del usuario
+      const responseDeleteFavs = await axios({
+        method: 'delete',
+        url: `http://localhost:3000/api/favorites/all`,
+        data: { id_user },
+        withCredentials: true
+      });
+
+      // Llamada a la api para borrar user
+      const responseDeleteUser = await axios({
+        method: 'delete',
+        url: `http://localhost:3000/api/user/email?email=${profile.email}`,
+        withCredentials: true
+      });
+
+      // // Las 3 líneas que hacen la magia de que se quede guardado el rol
+      // // Con el header ya se envía la cabecera con el token, no hay que manejarlo a mano
+      // En las futuras solicitudes por axios se enviará encabezado el token
+      const authHeader = response.headers.authorization;
+      axios.defaults.headers.common['Authorization'] = authHeader;
+
+      updateProfile({ email: email });
+      loginRedirect();
+
+    } catch (error) {
+      console.log(error.message);
+    }
+    setLoading(false);
+  };
+
   if (profile) {
     return <><section id="sectionProfile">
       <article className="cardUser">
         <div>
           {/* Si profile.avatar.length es menor a 0, poner img básica */}
-          <img src={profile.avatar} alt="" />
+          <img src={profile.avatar === null ? 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZvkFA_phQsAeSifqjozQU48-N6TwE2cGJ2A&s' : profile.avatar} alt={profile.username} />
           <div>
             <h2>{profile.username}</h2>
           </div>
           <div>
             <p>Email: {profile.email}</p>
             <p>Password: *******</p>
-            <p>Quote: {profile.quote}</p>
+            <p>Quote: {profile.quote === null ? 'Not a quote yet' : profile.quote}</p>
+            <div id="userActions">
+              <button><FontAwesomeIcon icon={faEdit} /></button>
+              <button onClick={deleteUser}><FontAwesomeIcon icon={faTrash} /></button>
+            </div>
           </div>
-        </div>
-        <div id="userActions">
-          <button><FontAwesomeIcon icon={faEdit} /></button>
-          <button><FontAwesomeIcon icon={faTrash} /></button>
+
         </div>
       </article>
 

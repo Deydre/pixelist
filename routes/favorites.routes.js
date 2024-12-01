@@ -7,4 +7,5 @@ const router = express.Router();
 router.get("/:email", favoritesController.getAllFavoritesFromUser);
 router.post("/", getAccessToken, decodeToken, favoritesController.markAsFavorite);
 router.delete("/", favoritesController.unmarkAsFavorite);
+router.delete("/all", favoritesController.deleteFavoritesFromUser);
 module.exports = router;
