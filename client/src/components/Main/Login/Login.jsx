@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import HashLoader from "react-spinners/HashLoader";
 import { context } from "../../../context/context";
 
-const Login = () => {
+const Login = () => { 
 
   const navigate = useNavigate();
   const { updateProfile } = useContext(context);
@@ -54,13 +54,19 @@ const Login = () => {
         withCredentials: true
       });
 
-      // // Las 3 líneas que hacen la magia de que se quede guardado el rol
-      // // Con el header ya se envía la cabecera con el token, no hay que manejarlo a mano
       // En las futuras solicitudes por axios se enviará encabezado el token
       const authHeader = response.headers.authorization;
       axios.defaults.headers.common['Authorization'] = authHeader;
 
-      updateProfile({ email: email });
+      try {
+        const response = await axios(`http://localhost:3000/api/user/me`, {
+          withCredentials: true
+        });
+        updateProfile(response.data[0])
+      } catch {
+        
+      }
+
       loginRedirect();
 
     } catch (error) {

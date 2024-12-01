@@ -13,7 +13,11 @@ const queries = {
     `,
     // Desmarcar como completado 
     unmarkAsFavorite: `DELETE FROM favorites
-    WHERE id_user = $1 AND id_game = $2`
-
+    WHERE id_user = $1 AND id_game = $2
+    `,
+    // Eliminar todos los favoritos de un usuario (para poder borrar su cuenta después)
+    deleteFavoritesFromUser: `DELETE FROM favorites
+    WHERE id_user = $1
+    `
 }
 module.exports = queries;

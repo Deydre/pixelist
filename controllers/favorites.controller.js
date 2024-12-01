@@ -49,8 +49,28 @@ const unmarkAsFavorite = async (req, res) => {
     }
 }
 
+
+const deleteFavoritesFromUser = async (req, res) => {
+    const id_user = req.body; // {id_user} le pasaremos el email por el body
+    try {
+        const response = await FavoritesModel.deleteFavoritesFromUser(id_user);
+        if (response) {
+            res.status(200).json({
+                message: `Favorites deleted successfully`,
+                data: response
+            });
+        } else {
+            res.status(404).json({ error: 'Favorites not found' });
+        }
+    } catch (error) {
+        console.error('Error deleting Favorites:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
 module.exports = {
     getAllFavoritesFromUser,
     markAsFavorite,
-    unmarkAsFavorite
+    unmarkAsFavorite,
+    deleteFavoritesFromUser
 }
