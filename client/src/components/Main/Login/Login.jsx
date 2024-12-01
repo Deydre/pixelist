@@ -51,7 +51,7 @@ const Login = () => {
       const authHeader = response.headers.authorization;
       axios.defaults.headers.common['Authorization'] = authHeader;
 
-      updateProfile(email);
+      updateProfile({email: email});
 
     } catch (error) {
       console.log(error.message);

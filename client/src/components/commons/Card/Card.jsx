@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 const Card = (game) => {
   const navigate = useNavigate();
   const { name, background_image, id, metacritic, slug, released, parent_platforms, genres } = game.data;
-  console.log(game.data)
   let colorMetacritic;
   metacritic >= 75 ? colorMetacritic = "green" : metacritic >= 50 ? colorMetacritic = "yellow" : colorMetacritic = "red";
 

@@ -38,8 +38,8 @@ function App() {
     // Guardamos sus favoritos
     const getFavorites = async () => {
       try {
-        if (profile) {
-          let response = await axios(`http://localhost:3000/api/favorites/${profile}`);
+        if (profile.email) {
+          let response = await axios(`http://localhost:3000/api/favorites/${profile.email}`);
           setFavsUser(response.data);
         }
       } catch (err) {
@@ -53,8 +53,8 @@ function App() {
     // Guardamos sus favoritos
     const getFavorites = async () => {
       try {
-        if (profile) {
-          let response = await axios(`http://localhost:3000/api/favorites/${profile}`);
+        if (profile.email) {
+          let response = await axios(`http://localhost:3000/api/favorites/${profile.email}`);
           setFavsUser(response.data);
         }
       } catch (err) {
