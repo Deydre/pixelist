@@ -19,6 +19,9 @@
     color: $secondary-color-soft;
     font-weight: 600;
     transition: color 0.3s ease;
+    letter-spacing: 2px;
+    font-weight: 400;
+    color: $secondary-color-soft-2;
 }
 
 #navBar li:hover, #navBar a:hover {
