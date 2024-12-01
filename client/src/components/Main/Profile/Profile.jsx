@@ -4,20 +4,17 @@ import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import axios from "axios";
 
 const ProfileView = () => {
-  let name = "Bolito";
-  let id = 2;
 
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     const getProfile = async () => {
       try {
-
         const response = await axios(`http://localhost:3000/api/user/me`, { 
           withCredentials: true 
         });
-        setProfile(response.data[0].email)
-      
+        setProfile(response.data[0])
+      console.log(response)
       } catch (err) {
         console.log(err);
       }
@@ -27,16 +24,19 @@ const ProfileView = () => {
   }, []);
 
   console.log(profile)
-  return <section id="sectionUser">
-    <article className="cardUser" id={id}>
+  if (profile !== null) {
+    return <section id="sectionUser">
+    <article className="cardUser">
       <div>
+        {/* Si profile.avatar.length es menor a 0, poner img básica */}
+        <img src={profile.avatar} alt="" />
         <div>
-          <h2>{name}</h2>
+          <h2>{profile.username}</h2>
         </div>
         <div>
-          <p>email</p>
-          <p>avatar</p>
-          <p>quote</p>
+          <p>Email: {profile.email}</p>
+          <p>Password: *******</p>
+          <p>Quote: {profile.quote}</p>
         </div>
       </div>
       <div id="userActions">
@@ -45,6 +45,8 @@ const ProfileView = () => {
       </div>
     </article>
   </section>
+  }
+ 
 };
 
 export default ProfileView;
