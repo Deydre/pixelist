@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../../assets/pixelist_logo.png"
+import logo from "../../../assets/pixelist_logo.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { context } from "../../../context/context";
 import axios from 'axios';
 
@@ -29,6 +31,7 @@ const NavBar = () => {
         <li className="nav-link active"><Link to='/signup'>SIGN UP</Link></li>
         <li className="nav-link active"><Link to='/login'>LOGIN</Link></li>
         <li className="nav-link active"><button onClick={handleLogout}>LOGOUT</button></li>
+        <li className="nav-link active"><Link to='/profile/:username'><FontAwesomeIcon icon={faUser} size="sm" /></Link></li>
       </div>
 
     </ul>

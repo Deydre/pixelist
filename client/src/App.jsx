@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import Header from './components/Header';
 import Main from './components/Main';
-import Footer from './components/Footer';
 import { context } from './context/context'
 import { BrowserRouter } from 'react-router-dom';
 import axios from "axios";
@@ -10,7 +9,7 @@ function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
 
   const [logged, setLogged] = useState(false);
-  // Leer token, descifrar, ver email y cambiar actualUser si hace falta
+
   const [actualUser, setActualUser] = useState("");
 
   const [favsUser, setFavsUser] = useState([]);
@@ -82,7 +81,6 @@ function App() {
           <Main />
         </context.Provider >
       </BrowserRouter>
-      <Footer />
     </>
   )
 }
