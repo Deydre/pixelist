@@ -2,12 +2,14 @@ import React, { useState, useEffect, useContext } from "react";
 import { context } from "../../../context/context"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 import HashLoader from "react-spinners/HashLoader";
 import axios from "axios";
 
 const ProfileView = () => {
-
-  const { profile, favsUser } = useContext(context);
+  
+  const navigate = useNavigate();
+  const { profile, favsUser, updateProfile } = useContext(context);
 
   const [loading, setLoading] = useState(true);
 
@@ -20,19 +22,28 @@ const ProfileView = () => {
     ));
   }
 
+  const logoutRedirect = () => {
+    navigate(`/`)
+  }
+
 
   const deleteUser = async () => {
     setLoading(true);
     try {
       let id_user = profile.id
       // Borramos primero todos los favoritos del usuario
-      await axios({
-        method: 'delete',
-        url: `http://localhost:3000/api/favorites/all`,
-        data: { id_user },
-        withCredentials: true
-      });
-
+      try{
+        await axios({
+          method: 'delete',
+          url: `http://localhost:3000/api/favorites/all`,
+          data: { id_user },
+          withCredentials: true
+        });
+  
+      }catch(err){
+        console.log(err)
+      }
+      
       // Llamada a la api para borrar user
       await axios({
         method: 'delete',
@@ -40,14 +51,20 @@ const ProfileView = () => {
         withCredentials: true
       });
 
-      // // Las 3 líneas que hacen la magia de que se quede guardado el rol
-      // // Con el header ya se envía la cabecera con el token, no hay que manejarlo a mano
-      // En las futuras solicitudes por axios se enviará encabezado el token
-      const authHeader = response.headers.authorization;
-      axios.defaults.headers.common['Authorization'] = authHeader;
-
-      updateProfile({ email: email });
-      loginRedirect();
+      // Borrar de la cookie
+      try {
+        await axios({
+          method: 'get',
+          url: 'http://localhost:3000/api/user/logout',
+          withCredentials: true
+        });
+        updateProfile("")
+      } catch (error) {
+        console.log(error.message);
+      }
+      // Borrar del estado
+      updateProfile("");
+      logoutRedirect();
 
     } catch (error) {
       console.log(error.message);

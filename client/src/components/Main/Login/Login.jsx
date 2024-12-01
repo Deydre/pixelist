@@ -54,8 +54,6 @@ const Login = () => {
         withCredentials: true
       });
 
-      // // Las 3 líneas que hacen la magia de que se quede guardado el rol
-      // // Con el header ya se envía la cabecera con el token, no hay que manejarlo a mano
       // En las futuras solicitudes por axios se enviará encabezado el token
       const authHeader = response.headers.authorization;
       axios.defaults.headers.common['Authorization'] = authHeader;
@@ -66,7 +64,7 @@ const Login = () => {
         });
         updateProfile(response.data[0])
       } catch {
-        console.log("Aún no se ha cargado el user o no hay user")
+        
       }
 
       loginRedirect();
