@@ -40,15 +40,6 @@ This project offers a **videogames web application** where users can:
 
 
 
-## 📦 APIS and libraries used
-
-| Logo                                                                                           | Description                                                        |
-|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
-| <img src="https://avatars.githubusercontent.com/u/221409?s=400&v=4" alt="NY Times Books API Logo" height="30"> | **NY Times Books API**: A free-to-use API that provides a vast collection of trivia questions across various categories, enabling dynamic quiz creation and engagement.               |
-| 
-
-
-
 ## 🌱 Challenges Faced
 
 - Implementing **React components and hooks** to create reusable and efficient UI elements while managing state and side effects effectively.  
@@ -58,9 +49,10 @@ This project offers a **videogames web application** where users can:
 
 ## 🛠️ Future Improvements
 
-- **Email Validation with Regex**: Implement regex checks in the Sign Up and Log In forms to ensure valid email formatting.
-- **User Verification on Sign In**: Check if a user exists in the system during sign-in, and display a warning if the user input is incorrect.
-- **Favorites System**: Create a favorites feature linked to each user via **Firebase Firestore**. Add a complementary page where users can view and manage their favorite books.
-- **Integration with Firebase Cloud Storage**: Allow users to upload profile pictures, storing the image URL in their Firebase Firestore document.
-- **Search by List and Book Name**: Add search functionality for easy lookup of lists and specific books.
-- **Book Category Filters**: Implement a filter system to sort books by category, making it easier for users to find relevant content.
+- **Integration with Sequelize**: Implement advanced query handling and relationships to enhance database operations.  
+- **Debounce for Input Fields**: Optimize search and input handling by reducing redundant API calls or state updates.  
+- **Forms in Popups**: Transition forms (e.g., Sign Up and Log In) to popups for a more seamless user experience.  
+- **Endpoint Testing**: Ensure robust backend performance with comprehensive testing for all API endpoints.  
+- **Component Optimization**: Refactor React components for better reusability, readability, and performance.  
+- **End-to-End (E2E) Testing**: Validate the entire user journey to identify and fix potential usability issues.  
+- **UX Improvements**: Enhance user experience with intuitive design updates and accessibility considerations.  
