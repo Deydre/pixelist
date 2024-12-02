@@ -8,38 +8,80 @@ import axios from "axios";
 function App() {
   const apiKey = import.meta.env.VITE_API_KEY;
 
-  const [logged, setLogged] = useState(false);
-
-  const [actualUser, setActualUser] = useState("");
-
   const [favsUser, setFavsUser] = useState([]);
 
-  const updateLogged = (booleanLogged) => {
-    setLogged([booleanLogged])
+  const [profile, setProfile] = useState(null);
+
+  const [actualCategory, setActualCategory] = useState("");
+
+  // Para login y logout
+  const updateProfile = (data) => {
+    setProfile(data)
   };
 
-  const updateActualUser = (userLogged) => {
-    setActualUser([userLogged])
+  // Para recargar favoritos
+  const updateFavsUser = async () => {
+    try {
+      if (profile.email) {
+        let response = await axios(`http://localhost:3000/api/favorites/${profile.email}`);
+        setFavsUser(response.data);
+      }
+    } catch {
+      console.log("Aún no se han cargado los favoritos del usuario")
+    }
   };
 
-  const updateFavsUser = (fav) => {
-    setFavsUser([fav])
+  const updateActualCategory = (actualCategory) => {
+    setActualCategory(actualCategory)
   };
 
-  // Guardar en estado los favs del usuario cuando el estado de éste cambia
   useEffect(() => {
+    // Comprobamos el user mediante su token con la ruta habilitada para ello
+    const getProfile = async () => {
+      try {
+        const response = await axios(`http://localhost:3000/api/user/me`, {
+          withCredentials: true
+        });
+        console.log({response})
+        setProfile(response.data[0])
+      } catch {
+        console.log("Aún no se ha cargado el user o no hay user")
+      }
+    };
+    getProfile();
+  }, []);
+
+  useEffect(() => {
+    // Guardamos sus favoritos
     const getFavorites = async () => {
       try {
-        if (!actualUser) return ""; 
-        let response = await axios(`http://localhost:3000/api/favorites/${actualUser}`);
-        setFavsUser(response.data);
+        if (profile.email) {
+          let response = await axios(`http://localhost:3000/api/favorites/${profile.email}`);
+          setFavsUser(response.data);
+        }
       } catch (err) {
-        console.log(err)
+        console.log("Aún no se han cargado los favoritos del usuario")
       }
     }
     getFavorites();
+  }, []);
 
-  }, [actualUser]);
+  useEffect(() => {
+    // Guardamos sus favoritos
+    const getFavorites = async () => {
+      try {
+        if (profile.email) {
+          let response = await axios(`http://localhost:3000/api/favorites/${profile.email}`);
+          setFavsUser(response.data);
+        }
+      } catch (err) {
+        console.log("Aún no se han cargado los favoritos del usuario")
+      }
+    }
+    getFavorites();
+  }, [profile]);
+
+
 
   // Contexto para categories porque lo van a usar los componentes CategoriesBar y Category
   const [categories, setCategories] = useState([])
@@ -66,16 +108,16 @@ function App() {
     }
     getCategory();
   }, []);
-
   return (
     <>
       <BrowserRouter >
         <context.Provider value={{
           categories, // Estado global donde siempre tendremos todas las categorías disponibles con sus juegos
           // actualCategory, updateActualCategory // Categoría actual en la que estamos
-          updateLogged,
-          actualUser, updateActualUser,
-          favsUser, updateFavsUser
+          // updateLogged,
+          profile, updateProfile,
+          favsUser, updateFavsUser,
+          updateActualCategory
         }}>
           <Header />
           <Main />

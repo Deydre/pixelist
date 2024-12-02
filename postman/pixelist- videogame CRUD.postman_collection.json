@@ -1,0 +1,37 @@
+{
+	"info": {
+		"_postman_id": "f3aa24e6-0c94-4a6e-ad6f-cb5945235d83",
+		"name": "pixelist/ videogame CRUD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "39566224"
+	},
+	"item": [
+		{
+			"name": "create new videogame",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 128,\r\n        \"name\": \"Videojuego creado desde POSTMAN\",\r\n        \"background_image\": \"www.imagem.com/imagen/1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/videogame"
+			},
+			"response": []
+		},
+		{
+			"name": "check if a game id exists",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/api/videogame/123"
+			},
+			"response": []
+		}
+	]
+}

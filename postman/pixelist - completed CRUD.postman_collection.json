@@ -1,0 +1,55 @@
+{
+	"info": {
+		"_postman_id": "dad27499-df5b-4cc1-bb9e-6c8818e72805",
+		"name": "pixelist / completed CRUD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "39566224"
+	},
+	"item": [
+		{
+			"name": "all completed games from one user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/api/completed/bolito@gmail.com"
+			},
+			"response": []
+		},
+		{
+			"name": "mark game as completed",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id_user\": 1,\n        \"id_game\": 125,\n        \"date\": \"2024-11-25\",\n        \"rating\": 5,\n        \"review\": \"Mu bonito\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/completed/"
+			},
+			"response": []
+		},
+		{
+			"name": "unmark game as completed",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id_user\": 1,\r\n        \"id_game\": 125\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/api/completed/"
+			},
+			"response": []
+		}
+	]
+}
