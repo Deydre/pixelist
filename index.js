@@ -4,6 +4,8 @@ const app = express();
 const port = 3000;
 const cors = require('cors');
 const path = require('path');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 
 //Logger
 const morgan = require("./middlewares/morgan")
@@ -25,6 +27,7 @@ const completedRoutes = require("./routes/completed.routes");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'client/build')));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Rutas habilitadas
 app.use('/api/user', userRoutes);

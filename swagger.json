@@ -1,0 +1,393 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Pixelist API",
+      "description": "API para gestionar usuarios, videojuegos y favoritos.",
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/api/user/signup": {
+        "post": {
+          "summary": "Registrar un nuevo usuario",
+          "description": "Registra un nuevo usuario en el sistema.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "description": "Nombre del usuario."
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Correo del usuario."
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Contraseña del usuario."
+                    }
+                  },
+                  "example": {
+                    "username": "POSTMAN2",
+                    "email": "tesdssdtuser2@gmail.com",
+                    "password": "Test1234"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Usuario registrado exitosamente."
+            },
+            "400": {
+              "description": "Error en los datos proporcionados."
+            }
+          }
+        }
+      },
+      "/api/user/login": {
+        "post": {
+          "summary": "Iniciar sesión",
+          "description": "Permite a un usuario autenticarse en el sistema.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "description": "Correo del usuario."
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Contraseña del usuario."
+                    }
+                  },
+                  "example": {
+                    "email": "chicle@gmail.com",
+                    "password": "1234abcd"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Sesión iniciada correctamente."
+            },
+            "401": {
+              "description": "Credenciales incorrectas."
+            }
+          }
+        }
+      },
+      "/api/user/logout": {
+        "get": {
+          "summary": "Cerrar sesión",
+          "description": "Cierra la sesión del usuario autenticado.",
+          "responses": {
+            "200": {
+              "description": "Sesión cerrada correctamente."
+            },
+            "401": {
+              "description": "Usuario no autenticado."
+            }
+          }
+        }
+      },
+      "/api/user/": {
+        "get": {
+          "summary": "Obtener todos los usuarios",
+          "description": "Devuelve una lista de todos los usuarios registrados.",
+          "responses": {
+            "200": {
+              "description": "Lista de usuarios obtenida correctamente."
+            }
+          }
+        }
+      },
+      "/api/user/email": {
+        "get": {
+          "summary": "Obtener usuario por email",
+          "description": "Busca un usuario en el sistema utilizando su correo electrónico.",
+          "parameters": [
+            {
+              "name": "email",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "example": "bolito@gmail.com"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Usuario encontrado."
+            },
+            "404": {
+              "description": "Usuario no encontrado."
+            }
+          }
+        },
+        "put": {
+          "summary": "Actualizar usuario por email",
+          "description": "Actualiza los datos de un usuario utilizando su correo electrónico.",
+          "parameters": [
+            {
+              "name": "email",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "example": "bolito@gmail.com"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string"
+                    },
+                    "password": {
+                      "type": "string"
+                    },
+                    "avatar": {
+                      "type": "string"
+                    },
+                    "quote": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "username": "Bolitochuli",
+                    "password": "12345678Aa",
+                    "avatar": "www.bolito.com/avatar/01",
+                    "quote": "Te faltan Katas"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Usuario actualizado correctamente."
+            }
+          }
+        },
+        "delete": {
+          "summary": "Eliminar usuario por email",
+          "description": "Elimina un usuario del sistema utilizando su correo electrónico.",
+          "parameters": [
+            {
+              "name": "email",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "example": "deydre2@gmail.com"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Usuario eliminado correctamente."
+            }
+          }
+        }
+      },
+      "/api/videogame": {
+        "post": {
+          "summary": "Crear un nuevo videojuego",
+          "description": "Añade un videojuego a la base de datos.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "background_image": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "id": 128,
+                    "name": "Videojuego creado desde POSTMAN",
+                    "background_image": "www.imagem.com/imagen/1"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Videojuego creado correctamente."
+            }
+          }
+        }
+      },
+      "/api/videogame/{id}": {
+        "get": {
+          "summary": "Comprobar si un videojuego existe",
+          "description": "Devuelve información de un videojuego por su ID.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "example": 123
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Videojuego encontrado."
+            },
+            "404": {
+              "description": "Videojuego no encontrado."
+            }
+          }
+        }
+      },
+      "/api/favorites/{email}": {
+        "get": {
+          "summary": "Obtener juegos favoritos de un usuario",
+          "description": "Devuelve todos los videojuegos favoritos de un usuario utilizando su correo electrónico.",
+          "parameters": [
+            {
+              "name": "email",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string",
+                "example": "patito@gmail.com"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Lista de juegos favoritos obtenida correctamente."
+            }
+          }
+        }
+      },
+      "/api/favorites": {
+        "post": {
+          "summary": "Marcar juego como favorito",
+          "description": "Añade un juego a la lista de favoritos de un usuario.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id_user": {
+                      "type": "integer"
+                    },
+                    "id_game": {
+                      "type": "integer"
+                    },
+                    "date": {
+                      "type": "string",
+                      "format": "date"
+                    }
+                  },
+                  "example": {
+                    "id_user": 1,
+                    "id_game": 125,
+                    "date": "2024-11-25T00:00:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Juego marcado como favorito correctamente."
+            }
+          }
+        },
+        "delete": {
+          "summary": "Desmarcar juego como favorito",
+          "description": "Elimina un juego de la lista de favoritos de un usuario.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id_user": {
+                      "type": "integer"
+                    },
+                    "id_game": {
+                      "type": "integer"
+                    }
+                  },
+                  "example": {
+                    "id_user": 1,
+                    "id_game": 125
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Juego desmarcado como favorito correctamente."
+            }
+          }
+        }
+      },
+      "/api/favorites/all": {
+        "delete": {
+          "summary": "Eliminar todos los favoritos de un usuario",
+          "description": "Borra todos los videojuegos favoritos de un usuario.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id_user": {
+                      "type": "integer"
+                    }
+                  },
+                  "example": {
+                    "id_user": 26
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Todos los favoritos eliminados correctamente."
+            }
+          }
+        }
+      }
+    }
+  }
