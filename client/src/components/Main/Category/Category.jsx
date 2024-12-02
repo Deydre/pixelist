@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 const Category = () => {
 
   const routeParams = useParams();
-  const { categories } = useContext(context);
+  const { categories, actualCategory } = useContext(context);
   const apiKey = import.meta.env.VITE_API_KEY;
 
   const [videogamesList, setVideogamesList] = useState([]);
@@ -50,11 +50,13 @@ const Category = () => {
     getVideogames();
   }, [routeParams.category]); // Hacemos esto cada vez que cambie el parámetro category de la ruta
 
+
   return <section id="home">
     <CategoriesBar />
     <div id="contentHome">
       <SearchBar />
       <section id="contentCards">
+
         {loading ? <HashLoader color="#fff" /> : renderCards()}
       </section>
     </div>

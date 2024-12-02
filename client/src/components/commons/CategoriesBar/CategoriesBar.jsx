@@ -7,10 +7,11 @@ import { useNavigate } from 'react-router-dom';
 const CategoriesBar = () => {
 
   const navigate = useNavigate();
-  const { categories } = useContext(context);
+  const { categories, updateActualCategory } = useContext(context);
 
   const categoryRedirect = (slug) => {
     navigate(`/categories/${slug}`)
+    updateActualCategory(slug)
   }
 
   const renderCategories = () => {
