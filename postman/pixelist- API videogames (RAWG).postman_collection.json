@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "532321fa-8cc7-47ea-a951-227b7a6c6c09",
+		"name": "pixelist/ API videogames (RAWG)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "39566224"
+	},
+	"item": [
+		{
+			"name": "first page of videogames from API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.rawg.io/api/games?page=1&key=8bc058a2ff334be08c12bd09fc19ad4b",
+					"protocol": "https",
+					"host": [
+						"api",
+						"rawg",
+						"io"
+					],
+					"path": [
+						"api",
+						"games"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "key",
+							"value": "8bc058a2ff334be08c12bd09fc19ad4b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "last page of videogames from API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.rawg.io/api/games?page=43871&key=8bc058a2ff334be08c12bd09fc19ad4b",
+					"protocol": "https",
+					"host": [
+						"api",
+						"rawg",
+						"io"
+					],
+					"path": [
+						"api",
+						"games"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "43871"
+						},
+						{
+							"key": "key",
+							"value": "8bc058a2ff334be08c12bd09fc19ad4b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "one videogame from API by id/name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.rawg.io/api/games/terraria?key=8bc058a2ff334be08c12bd09fc19ad4b",
+					"protocol": "https",
+					"host": [
+						"api",
+						"rawg",
+						"io"
+					],
+					"path": [
+						"api",
+						"games",
+						"terraria"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "8bc058a2ff334be08c12bd09fc19ad4b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get genres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.rawg.io/api/genres?key=8bc058a2ff334be08c12bd09fc19ad4b",
+					"protocol": "https",
+					"host": [
+						"api",
+						"rawg",
+						"io"
+					],
+					"path": [
+						"api",
+						"genres"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "8bc058a2ff334be08c12bd09fc19ad4b"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get platforms",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.rawg.io/api/platforms?key=8bc058a2ff334be08c12bd09fc19ad4b",
+					"protocol": "https",
+					"host": [
+						"api",
+						"rawg",
+						"io"
+					],
+					"path": [
+						"api",
+						"platforms"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "8bc058a2ff334be08c12bd09fc19ad4b"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

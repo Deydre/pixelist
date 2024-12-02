@@ -12,6 +12,8 @@ function App() {
 
   const [profile, setProfile] = useState(null);
 
+  const [actualCategory, setActualCategory] = useState("");
+
   // Para login y logout
   const updateProfile = (data) => {
     setProfile(data)
@@ -27,6 +29,10 @@ function App() {
     } catch {
       console.log("Aún no se han cargado los favoritos del usuario")
     }
+  };
+
+  const updateActualCategory = (actualCategory) => {
+    setActualCategory(actualCategory)
   };
 
   useEffect(() => {
@@ -110,7 +116,8 @@ function App() {
           // actualCategory, updateActualCategory // Categoría actual en la que estamos
           // updateLogged,
           profile, updateProfile,
-          favsUser, updateFavsUser
+          favsUser, updateFavsUser,
+          updateActualCategory
         }}>
           <Header />
           <Main />

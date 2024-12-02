@@ -12,7 +12,12 @@ const DetailCard = (game) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const id_user = profile.id;
+  let id_user;
+
+  if (profile){
+    id_user = profile.id;
+  }
+
 
   // Manejo de datos que vienen por prop
   const { name, background_image, id, metacritic, description_raw, released, parent_platforms, genres } = game.data;
