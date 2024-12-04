@@ -11,6 +11,9 @@ function App() {
   const [favsUser, setFavsUser] = useState([]);
 
   const [profile, setProfile] = useState(null);
+  
+  // Contexto para categories porque lo van a usar los componentes CategoriesBar y Category
+  const [categories, setCategories] = useState([])
 
   const [actualCategory, setActualCategory] = useState("");
 
@@ -19,7 +22,7 @@ function App() {
     setProfile(data)
   };
 
-  // Para recargar favoritos
+  // Para recargar favoritos (llamado por contexto desde otros componentes)
   const updateFavsUser = async () => {
     try {
       if (profile.email) {
@@ -35,6 +38,7 @@ function App() {
     setActualCategory(actualCategory)
   };
 
+  // Cuando cargue el componente, obtenemos el perfil y lo metemos en el estado Profile 
   useEffect(() => {
     // Comprobamos el user mediante su token con la ruta habilitada para ello
     const getProfile = async () => {
@@ -42,7 +46,6 @@ function App() {
         const response = await axios(`http://localhost:3000/api/user/me`, {
           withCredentials: true
         });
-        console.log({response})
         setProfile(response.data[0])
       } catch {
         console.log("Aún no se ha cargado el user o no hay user")
@@ -51,6 +54,7 @@ function App() {
     getProfile();
   }, []);
 
+  // Cuando cargue el component, guardamos favoritos del usuario
   useEffect(() => {
     // Guardamos sus favoritos
     const getFavorites = async () => {
@@ -66,6 +70,7 @@ function App() {
     getFavorites();
   }, []);
 
+  // Cuando cambie el estado Profile, guardamos sus favoritos en favsUser
   useEffect(() => {
     // Guardamos sus favoritos
     const getFavorites = async () => {
@@ -81,12 +86,7 @@ function App() {
     getFavorites();
   }, [profile]);
 
-
-
-  // Contexto para categories porque lo van a usar los componentes CategoriesBar y Category
-  const [categories, setCategories] = useState([])
-
-  // FETCH
+  // Cuando cargue el componente, guardamos las categorías de la API en el estado categories
   useEffect(() => {
     const getCategory = async () => {
       try {
@@ -112,9 +112,7 @@ function App() {
     <>
       <BrowserRouter >
         <context.Provider value={{
-          categories, // Estado global donde siempre tendremos todas las categorías disponibles con sus juegos
-          // actualCategory, updateActualCategory // Categoría actual en la que estamos
-          // updateLogged,
+          categories, 
           profile, updateProfile,
           favsUser, updateFavsUser,
           updateActualCategory

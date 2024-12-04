@@ -18,7 +18,6 @@ const DetailCard = (game) => {
     id_user = profile.id;
   }
 
-
   // Manejo de datos que vienen por prop
   const { name, background_image, id, metacritic, description_raw, released, parent_platforms, genres } = game.data;
   let id_game = id;
@@ -26,8 +25,7 @@ const DetailCard = (game) => {
   let colorMetacritic;
   metacritic >= 75 ? colorMetacritic = "green" : metacritic >= 50 ? colorMetacritic = "yellow" : colorMetacritic = "red";
 
-
-  // Comprobar si el juego es favorito
+  // Comprobar si el juego es favorito buscándolo en el array del estado global 
   useEffect(() => {
     const isFav = favsUser.some((fav) => fav.id_game === id_game);
     setIsFavorite(isFav);
@@ -54,11 +52,7 @@ const DetailCard = (game) => {
     setLoading(true);
     try {
       if (profile) {
-        
         if (!isFavorite) {
-          // COMPROBAMOS SI ES FAVORITO
-          const favsUser = await axios(`http://localhost:3000/api/favorites/${profile.email}`);
-          console.log(favsUser)
           // MIRAR SI EL JUEGO YA ESTÁ EN NUESTRA BBDD
           const gameExists = await axios(`http://localhost:3000/api/videogame/${id_game}`);
           // SI EL JUEGO NO EXISTE, LO CREAMOS EN NUESTRA BBDD
@@ -87,7 +81,7 @@ const DetailCard = (game) => {
           updateFavsUser(); 
           setIsFavorite(true);
           console.log("Marcando como favorito, id_game:", id_game);
-          // Hasta aquí bien-------------------------------------
+
         } else {
           await axios({
             method: 'delete',

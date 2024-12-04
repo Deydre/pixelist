@@ -23,9 +23,6 @@ const CategoriesBar = () => {
   }
 
 
-  // Llamada a la API externa para obtener los géneros
-  // https://api.rawg.io/api/genres?key=8bc058a2ff334be08c12bd09fc19ad4b
-  // Pintar géneros dinámicamente y meterles un onclick que lleve a categories con params
 
   return <aside id="categoriesBar">
     <h6>CATEGORIES</h6>
