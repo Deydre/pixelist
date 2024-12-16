@@ -25,7 +25,8 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.0.1",
     "react-spinners": "^0.14.1",
-    "sass": "^1.83.0"
+    "sass": "^1.83.0",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
