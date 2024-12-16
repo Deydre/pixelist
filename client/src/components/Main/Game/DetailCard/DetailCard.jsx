@@ -57,15 +57,15 @@ const DetailCard = (game) => {
         
         if (!isFavorite) {
           // COMPROBAMOS SI ES FAVORITO
-          const favsUser = await axios(`http://localhost:3000/api/favorites/${profile.email}`);
+          const favsUser = await axios(`/api/favorites/${profile.email}`);
           console.log(favsUser)
           // MIRAR SI EL JUEGO YA ESTÁ EN NUESTRA BBDD
-          const gameExists = await axios(`http://localhost:3000/api/videogame/${id_game}`);
+          const gameExists = await axios(`/api/videogame/${id_game}`);
           // SI EL JUEGO NO EXISTE, LO CREAMOS EN NUESTRA BBDD
           if (!gameExists.data) {
             await axios({
               method: 'post',
-              url: 'http://localhost:3000/api/videogame',
+              url: '/api/videogame',
               data: { id, name, background_image },
               withCredentials: true
             });
@@ -79,7 +79,7 @@ const DetailCard = (game) => {
           // Buscar el email en el token y buscar la id en la BBDD
           await axios({
             method: 'post',
-            url: 'http://localhost:3000/api/favorites/',
+            url: '/api/favorites/',
             data: { id_user, id_game, date },
             withCredentials: true
           });
@@ -91,7 +91,7 @@ const DetailCard = (game) => {
         } else {
           await axios({
             method: 'delete',
-            url: 'http://localhost:3000/api/favorites/',
+            url: '/api/favorites/',
             data: { id_user, id_game },
             withCredentials: true
           });

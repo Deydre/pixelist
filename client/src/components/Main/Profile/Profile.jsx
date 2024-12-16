@@ -35,7 +35,7 @@ const ProfileView = () => {
       try{
         await axios({
           method: 'delete',
-          url: `http://localhost:3000/api/favorites/all`,
+          url: `/api/favorites/all`,
           data: { id_user },
           withCredentials: true
         });
@@ -47,7 +47,7 @@ const ProfileView = () => {
       // Llamada a la api para borrar user
       await axios({
         method: 'delete',
-        url: `http://localhost:3000/api/user/email?email=${profile.email}`,
+        url: `/api/user/email?email=${profile.email}`,
         withCredentials: true
       });
 
@@ -55,7 +55,7 @@ const ProfileView = () => {
       try {
         await axios({
           method: 'get',
-          url: 'http://localhost:3000/api/user/logout',
+          url: '/api/user/logout',
           withCredentials: true
         });
         updateProfile("")

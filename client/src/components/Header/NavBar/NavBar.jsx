@@ -14,7 +14,7 @@ const NavBar = () => {
     try {
       await axios({
         method: 'get',
-        url: 'http://localhost:3000/api/user/logout',
+        url: 'https://pixelist.onrender.com/api/user/logout',
         withCredentials: true
       });
       updateProfile("")

@@ -20,7 +20,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:3000/api/user/signup"
+				"url": "/api/user/signup"
 			},
 			"response": []
 		},
@@ -38,7 +38,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:3000/api/user/login"
+				"url": "/api/user/login"
 			},
 			"response": []
 		},
@@ -59,7 +59,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:3000/api/user/logout"
+				"url": "/api/user/logout"
 			},
 			"response": []
 		},
@@ -68,7 +68,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:3000/api/user/"
+				"url": "/api/user/"
 			},
 			"response": []
 		},
@@ -78,7 +78,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/user/email?email=bolito@gmail.com",
+					"raw": "/api/user/email?email=bolito@gmail.com",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -114,7 +114,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/user/email?email=bolito@gmail.com",
+					"raw": "/api/user/email?email=bolito@gmail.com",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -141,7 +141,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/user/email?email=deydre2@gmail.com",
+					"raw": "/api/user/email?email=deydre2@gmail.com",
 					"protocol": "http",
 					"host": [
 						"localhost"

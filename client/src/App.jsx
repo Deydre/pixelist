@@ -23,7 +23,7 @@ function App() {
   const updateFavsUser = async () => {
     try {
       if (profile.email) {
-        let response = await axios(`http://localhost:3000/api/favorites/${profile.email}`);
+        let response = await axios(`https://pixelist.onrender.com/api/favorites/${profile.email}`);
         setFavsUser(response.data);
       }
     } catch {
@@ -39,7 +39,7 @@ function App() {
     // Comprobamos el user mediante su token con la ruta habilitada para ello
     const getProfile = async () => {
       try {
-        const response = await axios(`http://localhost:3000/api/user/me`, {
+        const response = await axios(`https://pixelist.onrender.com/api/user/me`, {
           withCredentials: true
         });
         console.log({response})
@@ -56,7 +56,7 @@ function App() {
     const getFavorites = async () => {
       try {
         if (profile.email) {
-          let response = await axios(`http://localhost:3000/api/favorites/${profile.email}`);
+          let response = await axios(`https://pixelist.onrender.com/api/favorites/${profile.email}`);
           setFavsUser(response.data);
         }
       } catch (err) {
@@ -71,7 +71,7 @@ function App() {
     const getFavorites = async () => {
       try {
         if (profile.email) {
-          let response = await axios(`http://localhost:3000/api/favorites/${profile.email}`);
+          let response = await axios(`https://pixelist.onrender.com/api/favorites/${profile.email}`);
           setFavsUser(response.data);
         }
       } catch (err) {

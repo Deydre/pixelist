@@ -20,7 +20,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:3000/api/videogame"
+				"url": "/api/videogame"
 			},
 			"response": []
 		},
@@ -29,7 +29,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:3000/api/videogame/123"
+				"url": "/api/videogame/123"
 			},
 			"response": []
 		}

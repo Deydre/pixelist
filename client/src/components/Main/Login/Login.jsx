@@ -49,7 +49,7 @@ const Login = () => {
       // Llamada a la api con los datos del form para hacer login
       const response = await axios({
         method: 'post',
-        url: 'http://localhost:3000/api/user/login',
+        url: 'https://pixelist.onrender.com/api/user/login',
         data: { email, password },
         withCredentials: true
       });
@@ -59,7 +59,7 @@ const Login = () => {
       axios.defaults.headers.common['Authorization'] = authHeader;
 
       try {
-        const response = await axios(`http://localhost:3000/api/user/me`, {
+        const response = await axios(`https://pixelist.onrender.com/api/user/me`, {
           withCredentials: true
         });
         updateProfile(response.data[0])
