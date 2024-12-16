@@ -1,14 +1,14 @@
-@import './views/App.scss';
+@import 'views/App';
 
-@import './components/Header.scss';
-@import './components/Main.scss';
-@import './components/Home.scss';
-@import './components/NavBar.scss';
-@import './components/categoriesBar.scss';
-@import './components/SearchBar.scss';
-@import './components/Card.scss';
-@import './components/Game.scss';
-@import './components/DetailCard.scss';
-@import './components/Profile.scss';
-@import './components/Login.scss';
-@import './components/SignUp.scss';
+@import 'components/Header';
+@import 'components/Main';
+@import 'components/Home';
+@import 'components/NavBar';
+@import 'components/categoriesBar';
+@import 'components/SearchBar';
+@import 'components/Card';
+@import 'components/Game';
+@import 'components/DetailCard';
+@import 'components/Profile';
+@import 'components/Login';
+@import 'components/SignUp';
