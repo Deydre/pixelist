@@ -73,6 +73,7 @@ const getAllUsers = async (req, res) => {
 
 const getUserByEmail = async (req, res) => {
     const email = req.token.email;
+    console.log(req.token.email)
 
     try {
         const userData = await UserModel.getUserByEmail(email);

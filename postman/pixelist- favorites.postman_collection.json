@@ -11,7 +11,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:3000/api/favorites/patito@gmail.com"
+				"url": "/api/favorites/patito@gmail.com"
 			},
 			"response": []
 		},
@@ -29,7 +29,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:3000/api/favorites/"
+				"url": "/api/favorites/"
 			},
 			"response": []
 		},
@@ -47,7 +47,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:3000/api/favorite/"
+				"url": "/api/favorite/"
 			},
 			"response": []
 		},
@@ -65,7 +65,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:3000/api/favorites/all"
+				"url": "/api/favorites/all"
 			},
 			"response": []
 		}

@@ -11,7 +11,7 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "http://localhost:3000/api/wishlisted/bolito@gmail.com"
+				"url": "/api/wishlisted/bolito@gmail.com"
 			},
 			"response": []
 		},
@@ -29,7 +29,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:3000/api/completed/"
+				"url": "/api/completed/"
 			},
 			"response": []
 		},
@@ -47,7 +47,7 @@
 						}
 					}
 				},
-				"url": "http://localhost:3000/api/completed/"
+				"url": "/api/completed/"
 			},
 			"response": []
 		}

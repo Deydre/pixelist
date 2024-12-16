@@ -11,10 +11,11 @@ const swaggerDocument = require('./swagger.json');
 const morgan = require("./middlewares/morgan")
 app.use(morgan(':method :url :status - :response-time ms :body'));
 
+
 // Habilitar la recepción de peticiones tipo JSON
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:5173', // URL del front
+    origin: ['http://localhost:5173', 'https://pixelist.onrender.com'], // URL del front
     credentials: true
 }));
 
@@ -25,8 +26,9 @@ const favoritesRoutes = require("./routes/favorites.routes");
 const wishlistedRoutes = require("./routes/wishlisted.routes");
 const completedRoutes = require("./routes/completed.routes");
 
+// Usar client app
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/dist')));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Rutas habilitadas
